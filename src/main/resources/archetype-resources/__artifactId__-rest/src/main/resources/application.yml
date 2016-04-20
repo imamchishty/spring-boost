@@ -23,6 +23,14 @@ management.contextPath: /admin
 #security.user.name: admin
 #security.user.password: admin
 
+# Custom actuators
+exception.interceptor.queue.size: 50
+exception.interceptor.endpoint: exceptions
+exception.interceptor.stacktrace: true
+trace.interceptor.queue.size: 50
+trace.interceptor.endpoint: requests
+
+
 # Trace Request JPA requires these settings
 # Please modify for your desired DB. Currently uses an inmemory instance of HSQL.
 trace-request:
