@@ -30,7 +30,7 @@ import java.util.Arrays;
 @EnableThreadContextAspect
 @EnableActuatorsAndInterceptors
 @PropertySources(value = {
-        @PropertySource(value = "classpath:/git.properties")
+        @PropertySource(value = "classpath:/git-build.properties")
 })
 // Uncomment when spring-cloud is available, see application.yml and bootstrap.yml
 @EnableDiscoveryClient

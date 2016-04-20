@@ -194,7 +194,7 @@
                 <configuration>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
+                    <generateGitPropertiesFilename>src/main/resources/git-build.properties</generateGitPropertiesFilename>
                     <format>properties</format>
                     <dateFormat>dd.MM.yyyy HH:mm:ss z</dateFormat>
                 </configuration>
