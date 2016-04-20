@@ -9,10 +9,9 @@
         </layout>
     </appender>
 
-    <logger name="com.mkyong.web" level="debug"
-            additivity="false">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
-    </logger>
+    </root>
 
     <root level="error">
         <appender-ref ref="STDOUT"/>
