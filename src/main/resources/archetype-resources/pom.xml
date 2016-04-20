@@ -36,7 +36,7 @@
         <!-- JMeter properties (defaulted - can be override via command line args) -->
         <host>localhost</host>
         <port>8080</port>
-        <docker.image.prefix>${pom.groupId}</docker.image.prefix>
+        <docker.image.prefix>${project.groupId}</docker.image.prefix>
 
         <ci.build>${BUILD_NUMBER}</ci.build>
         <ci.url>${BUILD_URL}</ci.url>
