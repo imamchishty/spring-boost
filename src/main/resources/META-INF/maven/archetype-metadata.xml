@@ -1,0 +1,205 @@
+<archetype-descriptor name="maven-restful-archetype" partial="true">
+
+    <fileSets>
+
+        <!--Create parent/main directory-->
+        <fileSet filtered="true" encoding="UTF8">
+            <directory></directory>
+            <includes>
+                <include>pom.xml</include>
+                <include>run.sh</include>
+                <include>plugin.sh</include>
+                <include>README.txt</include>
+            </includes>
+        </fileSet>
+
+        <!--create exception module-->
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception/src/main/java/__packageInPathFormat__/exception</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception/src/main/resources</directory>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception/src/test/java/__packageInPathFormat__/exception</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception/src/test/resources</directory>
+        </fileSet>
+
+        <!--create model module-->
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model/src/main/java/__packageInPathFormat__/model</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model/src/main/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model/src/test/java/__packageInPathFormat__/model</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <!--create rest module-->
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest</directory>
+            <includes>
+                <include>pom.xml</include>
+                <include>src/main/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/docker</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/java/__packageInPathFormat__/rest</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/java/__packageInPathFormat__/rest/controller</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/java/__packageInPathFormat__/rest/constant</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/test/java/__packageInPathFormat__/rest</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="false" encoding="UTF8">
+            <directory>__artifactId__-rest/src/test/jmeter</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <!--create service module-->
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service/src/main/java/__packageInPathFormat__/service</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service/src/main/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service/src/test/java/__packageInPathFormat__/service</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <!-- Create cloud servers directory-->
+        <fileSet filtered="false" encoding="UTF8">
+            <directory>cloud-servers</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+    </fileSets>
+
+</archetype-descriptor>

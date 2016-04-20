@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${artifactId}-parent</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <artifactId>${artifactId}-exception</artifactId>
+    <packaging>jar</packaging>
+    <name>${artifactId}-exception</name>
+    <description>
+        Module contains the primary exception,
+        the client exception model and also all business codes for exceptional circumstances.
+    </description>
+
+    <dependencies>
+
+        <!-- Library provides the root exceptions and the business codes interface -->
+        <dependency>
+            <groupId>com.shedhack.exception</groupId>
+            <artifactId>exception-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

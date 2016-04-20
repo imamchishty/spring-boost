@@ -1,0 +1,338 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}-parent</artifactId>
+    <version>${version}</version>
+    <packaging>pom</packaging>
+    <name>${artifactId}-parent</name>
+    <description>${artifactId}-parent</description>
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Brixton.RC2</version>
+        <relativePath/>
+        <!-- lookup parent from repository -->
+    </parent>
+
+    <modules>
+        <module>${artifactId}-rest</module>
+        <module>${artifactId}-exception</module>
+        <module>${artifactId}-model</module>
+        <module>${artifactId}-service</module>
+    </modules>
+
+    <ciManagement>
+        <url>ci-url</url>
+    </ciManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+
+        <!-- JMeter properties (defaulted - can be override via command line args) -->
+        <host>localhost</host>
+        <port>8080</port>
+        <docker.image.prefix>${pom.groupId}</docker.image.prefix>
+
+        <ci.build>${BUILD_NUMBER}</ci.build>
+        <ci.url>${BUILD_URL}</ci.url>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Manage local dependencies -->
+
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Shedhack dependencies -->
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-api</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-filter</artifactId>
+                <version>1.0.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-jpa</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.exception</groupId>
+                <artifactId>exception-controller-spring</artifactId>
+                <version>1.0.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.exception</groupId>
+                <artifactId>exception-core</artifactId>
+                <version>1.0.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.thread</groupId>
+                <artifactId>thread-context-aspect</artifactId>
+                <version>1.0.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.spring</groupId>
+                <artifactId>spring-actuator</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- Integration/Specification Tests -->
+            <!-- mvn failsafe:integration-test -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>failsafe-integration-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>none</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/*IT.java</include>
+                        <include>**/*IntegrationTest.java</include>
+                        <include>**/*ST.java</include>
+                        <include>**/*SpecTest.java</include>
+                        <include>**/*SpecificationTest.java</include>
+                        <include>**/*Spec.java</include>
+                        <include>**/*Specification.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- JMeter tests -->
+            <!-- mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080 -->
+            <!-- Please note that this will run with mvn site, you should modify this accordingly -->
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>1.10.1</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <goal>-t</goal>
+
+                    <propertiesUser>
+                        <host>${host}</host>
+                        <port>${port}</port>
+                    </propertiesUser>
+
+                    <propertiesJMeter>
+                        <log_level.jmeter>DEBUG</log_level.jmeter>
+                    </propertiesJMeter>
+
+                    <jMeterProcessJVMSettings>
+                        <xms>1024</xms>
+                        <xmx>1024</xmx>
+                        <arguments>
+                            <argument>-Xprof</argument>
+                            <argument>-Xfuture</argument>
+                        </arguments>
+                    </jMeterProcessJVMSettings>
+
+                    <jmeterPlugins>
+                        <plugin>
+                            <groupId>kg.apc</groupId>
+                            <artifactId>jmeter-plugins</artifactId>
+                        </plugin>
+                    </jmeterPlugins>
+
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Manifest -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+
+                <configuration>
+
+                    <!-- Manifest -->
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addClasspath>false</addClasspath>
+                            <classpathPrefix>lib</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Title>${project.name}</Specification-Title>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- When the app runs outside of a CI server then we don't have access
+            to certain properties, so we just give defaults -->
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>default-property-setter</name>
+                </property>
+            </activation>
+
+            <!-- default values, please adjust or use the spring Value default -->
+            <properties>
+                <ci.build>unknown</ci.build>
+                <ci.url>unknown</ci.url>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

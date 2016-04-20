@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: demo-eureka-server
+  profiles: default
+#  cloud:
+#    config:
+#      uri: http://localhost:8070
+
+server:
+  port: 8071
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enable-self-preservation: false
+
+  instance:
+    hostname: eurekahost
+
+
