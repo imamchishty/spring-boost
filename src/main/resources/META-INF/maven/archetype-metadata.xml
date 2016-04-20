@@ -130,10 +130,11 @@
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-rest/src/main/resources</directory>
             <includes>
-                <include>**/*.yml</include>
-                <include>**/*.txt</include>
-                <include>**/*.xml</include>
-                <include>**/*.properties</include>
+                <include>application.yml</include>
+                <include>banner.txt</include>
+                <include>bootstrap.yml</include>
+                <include>git.properties</include>
+                <include>logback.xml</include>
             </includes>
         </fileSet>
 
