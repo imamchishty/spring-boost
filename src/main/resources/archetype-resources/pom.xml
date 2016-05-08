@@ -23,6 +23,7 @@
         <module>${artifactId}-exception</module>
         <module>${artifactId}-model</module>
         <module>${artifactId}-service</module>
+        <module>${artifactId}-domain</module>
     </modules>
 
     <ciManagement>
@@ -68,6 +69,12 @@
             <dependency>
                 <groupId>${groupId}</groupId>
                 <artifactId>${artifactId}-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

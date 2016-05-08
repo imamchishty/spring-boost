@@ -9,10 +9,10 @@
         <version>${version}</version>
     </parent>
 
-    <artifactId>${artifactId}-service</artifactId>
+    <artifactId>${artifactId}-domain</artifactId>
     <packaging>jar</packaging>
-    <name>${artifactId}-service</name>
-    <description>Module contains business services which are exposed via the rest module.</description>
+    <name>${artifactId}-domain</name>
+    <description>Domain - repo, entities etc</description>
 
     <dependencies>
 
@@ -26,26 +26,6 @@
         <dependency>
             <groupId>${groupId}</groupId>
             <artifactId>${artifactId}-model</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>${artifactId}-domain</artifactId>
-        </dependency>
-
-        <!-- External dependencies -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
-        </dependency>
-
-        <!-- Test dependencies -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
     </dependencies>

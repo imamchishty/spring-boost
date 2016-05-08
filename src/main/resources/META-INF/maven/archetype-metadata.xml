@@ -81,6 +81,43 @@
             </includes>
         </fileSet>
 
+        <!--create domain module-->
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain/src/main/java/__packageInPathFormat__/domain</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain/src/main/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain/src/test/java/__packageInPathFormat__/domain</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
         <!--create rest module-->
 
         <fileSet filtered="true" encoding="UTF8">
