@@ -1,0 +1,28 @@
+---
+spring:
+  application:
+    name: zuul
+
+# If you want to store these settings in the config server prefixed with [spring, e.g. spring.cloud.config]
+#  cloud:
+#    config:
+#      uri: http://localhost:8070
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8071/eureka/
+
+# When running outside of eureka set this to false and remove the eureka settings above
+#ribbon.eureka.enabled: false
+
+server:
+  port: 8072
+
+# Add the paths for the Gateway
+# XXX is the name of your app, e.g. X-rest and YYY is the endpoint you'd access
+zuul:
+  ignoredPatterns: /**/admin/**
+  routes.XXX:
+    path: /YYY/**
+    #url: http://localhost:8080 -- url is not required if eureka is being used

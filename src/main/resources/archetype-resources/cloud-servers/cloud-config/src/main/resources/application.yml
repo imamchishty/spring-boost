@@ -1,0 +1,16 @@
+---
+spring:
+  application:
+    name: config
+  profiles: default
+
+# Currently set to serve local files, e.g. in the resources folder for this project, alternative is to use git or another repo.
+# When you do this remove the native prop:
+spring.profiles.active: native
+
+# If you're storing the config files on something like github use the following syntax:
+#spring.cloud.config.server.git.uri: https://github.com/imamchishty/spring-cloud-server
+#spring.cloud.config.server.git.searchPaths: config
+
+server:
+  port: 8070
