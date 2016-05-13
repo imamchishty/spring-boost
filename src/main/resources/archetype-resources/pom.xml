@@ -180,15 +180,6 @@
                 <groupId>com.lazerycode.jmeter</groupId>
                 <artifactId>jmeter-maven-plugin</artifactId>
                 <version>1.10.1</version>
-                <executions>
-                    <execution>
-                        <id>jmeter-tests</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>jmeter</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <skipTests>false</skipTests>
                     <goal>-t</goal>
