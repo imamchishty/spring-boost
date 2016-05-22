@@ -1,0 +1,27 @@
+ -----
+ ${artifactId}-parent
+ -----
+ Date
+ -----
+
+Database
+
+* Introduction
+
+
+* Schema
+
+
+* Installation
+
+
+* Developers environment
+
+
+* Required scripts per release
+
+*---------------*-----------------------------------*
+| Release       | Scripts                           |
+*---------------*-----------------------------------*
+| 1.0.0         | 1.sql, 2.sql                      |
+*---------------*-----------------------------------*

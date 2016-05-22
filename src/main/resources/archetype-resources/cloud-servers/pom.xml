@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.demo.cloud</groupId>
+    <artifactId>cloud-servers-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cloud-servers-parent</name>
+    <description>cloud-servers-parent</description>
+
+
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Brixton.RC2</version>
+        <relativePath/>
+        <!-- lookup parent from repository -->
+    </parent>
+
+
+    <modules>
+        <module>cloud-config</module>
+        <module>cloud-eureka</module>
+        <module>cloud-turbine</module>
+        <module>cloud-zuul</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

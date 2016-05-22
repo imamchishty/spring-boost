@@ -1,0 +1,30 @@
+<project name="${artifactId}-model">
+
+	<publishDate format="dd MMM yyyy" />
+	
+	<version position="right" />
+	
+	<body>
+		<menu name="${artifactId}-model">
+			<item name="Overview" href="/index.html" />
+		</menu>
+	
+		<menu ref="modules" />
+			<menu ref="reports" />
+		<menu ref="Other Resources" />
+
+	</body>
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+	
+	<custom>
+		<fluidoSkin>
+			<sideBarEnabled>true</sideBarEnabled>
+		</fluidoSkin>
+	</custom>
+  
+</project>

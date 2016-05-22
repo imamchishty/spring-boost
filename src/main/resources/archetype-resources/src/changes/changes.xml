@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+
+   <properties>
+      <title>${artifactId}</title>
+      <author email="you@email.com">YOU</author>
+   </properties>
+   
+   <body>
+		<release version="1.0.0" date="12-MAY-22" description="Initial Release">
+		
+			<!-- Just for reference action type can be update, add, fix, remove -->
+			<action dev="YOU" type="update">First release</action>
+		</release>
+
+
+   </body>
+
+   </document>

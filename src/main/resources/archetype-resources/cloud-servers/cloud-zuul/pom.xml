@@ -6,11 +6,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Brixton.RELEASE</version>
-        <relativePath/>
-        <!-- lookup parent from repository -->
+        <groupId>com.demo.cloud</groupId>
+        <artifactId>cloud-servers-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>cloud-zuul</artifactId>
@@ -61,23 +59,5 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>

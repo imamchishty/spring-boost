@@ -1,0 +1,37 @@
+<project name="${artifactId}-parent">
+
+	<publishDate format="dd MMM yyyy" />
+	
+	<version position="right" />
+	
+	<body>
+		<menu name="${artifactId}-parent">
+			<item name="Overview" href="/index.html" />
+			<item name="Architecture" href="/architecture.html" />
+			<item name="Deployments" href="/deployments.html" />
+			<item name="Database" href="/database.html" />
+			<item name="Installation" href="/installation.html" />
+			<item name="Developers" href="/developers.html" />
+			<item name="API" href="/api.html" />
+			<item name="Admin" href="/admin.html" />
+		</menu>
+	
+		<menu ref="modules" />
+			<menu ref="reports" />
+		<menu ref="Other Resources" />
+
+	</body>
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+	
+	<custom>
+		<fluidoSkin>
+			<sideBarEnabled>true</sideBarEnabled>
+		</fluidoSkin>
+	</custom>
+  
+</project>

@@ -13,6 +13,14 @@
             </includes>
         </fileSet>
 
+        <!-- Contains the root site -->
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>src</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
         <!--create exception module-->
 
         <fileSet filtered="true" encoding="UTF8">
@@ -42,6 +50,13 @@
 
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-exception/src/test/resources</directory>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-exception/src/site</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
         </fileSet>
 
         <!--create model module-->
@@ -81,6 +96,13 @@
             </includes>
         </fileSet>
 
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-model/src/site</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
         <!--create domain module-->
 
         <fileSet filtered="true" encoding="UTF8">
@@ -113,6 +135,13 @@
 
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-domain/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-domain/src/site</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
@@ -163,7 +192,6 @@
             </includes>
         </fileSet>
 
-
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-rest/src/main/resources</directory>
             <includes>
@@ -191,6 +219,13 @@
 
         <fileSet filtered="false" encoding="UTF8">
             <directory>__artifactId__-rest/src/test/jmeter</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-rest/src/site</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
@@ -228,6 +263,13 @@
 
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-service/src/test/resources</directory>
+            <includes>
+                <include>**/*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF8">
+            <directory>__artifactId__-service/src/site</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
