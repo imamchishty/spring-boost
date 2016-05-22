@@ -39,6 +39,6 @@ public class PingControllerIntegrationTest {
     @Test
     public void checkPing() throws Exception {
         ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-        assertThat(response.getBody(), equalTo("Application is running....."));
+        assertThat(response.getBody(), equalTo("${artifactId}-rest is running....."));
     }
 }

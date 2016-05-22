@@ -6,6 +6,7 @@ import ${package}.rest.constant.ApiConstants;
 import com.shedhack.exception.core.BusinessException;
 import com.shedhack.thread.context.annotation.ThreadContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +22,19 @@ import java.util.*;
 @RestController
 public class PingController {
 
+    @Value("${spring.application.name}")
+    private String appName;
+
     /**
      * Used to provide tools a HTTP 200 OK when service is running.
      */
     @RequestMapping(path = ApiConstants.API_PING)
     public ResponseEntity<String> ping(){
-        return new ResponseEntity<>("Application is running.....", HttpStatus.OK);
+        return new ResponseEntity<>(appName + " is running.....", HttpStatus.OK);
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     // ---------------------------------

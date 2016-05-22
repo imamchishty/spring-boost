@@ -27,13 +27,15 @@ public class PingControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new PingController()).build();
+		PingController controller = new PingController();
+		controller.setAppName("${artifactId}-rest");
+		mvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
 	@Test
 	public void checkPing() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get(ApiConstants.API_PING).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("Application is running.....")));
+				.andExpect(content().string(equalTo("${artifactId}-rest is running.....")));
 	}
 }
