@@ -17,11 +17,6 @@ eureka:
     health-check-url-path: ${management.contextPath}/health
 
 management.contextPath: /admin
-#management.port: 8081
-#management.security.enabled: true
-#security.basic.enabled: true
-#security.user.name: admin
-#security.user.password: admin
 
 # Custom actuators
 exception.interceptor.queue.size: 50
