@@ -13,7 +13,7 @@ public class ApiConstants {
 
     public static final String API_PING = API_ROOT + "/ping";
 
-    public static final String API_DOCS_ROOT = "/docs";
+    public static final String API_DOCS_ROOT = API_ROOT + "/docs";
 
     // Management root URI
     public static final String API_MAN_ROOT ="/admin";
