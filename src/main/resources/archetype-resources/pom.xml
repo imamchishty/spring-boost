@@ -26,9 +26,45 @@
         <module>${artifactId}-domain</module>
     </modules>
 
+    <!-- FIXME: Update with the correct settings -->
+    <scm>
+        <connection>scm:git:git@github.com:USERNAME/REPO.git</connection>
+        <developerConnection>scm:git:git@github.com:USERNAME/REPO.git</developerConnection>
+        <url>git@github.com:USERNAME/REPO.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- FIXME: Update with the correct settings -->
     <ciManagement>
         <url>ci-url</url>
     </ciManagement>
+
+    <!-- FIXME: Update with the correct settings -->
+    <issueManagement>
+        <url>jira</url>
+    </issueManagement>
+
+    <!-- FIXME: Update with the correct settings -->
+    <inceptionYear>2016</inceptionYear>
+
+    <!-- FIXME: Update with the correct settings -->
+    <organization>
+        <name>NAME</name>
+        <url>URL</url>
+    </organization>
+
+    <!-- FIXME: Update with the correct settings -->
+    <developers>
+        <developer>
+            <id>ID</id>
+            <name>NAME</name>
+            <roles>
+                <role>Developer</role>
+                <role>Architect</role>
+            </roles>
+            <email>EMAIL</email>
+        </developer>
+    </developers>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,14 +73,13 @@
         <!-- JMeter properties (defaulted - can be override via command line args) -->
         <host>localhost</host>
         <port>8080</port>
+
+        <!-- docker settings -->
         <docker.image.prefix>${project.groupId}</docker.image.prefix>
 
+        <!-- CI settings -->
         <ci.build>${BUILD_NUMBER}</ci.build>
         <ci.url>${BUILD_URL}</ci.url>
-
-        <!-- github server settings required in pom.xml if you wish to host maven site on github pages. -->
-        <github.global.server>github</github.global.server>
-        <url>https://github.com/imamchishty/service-text-lookup</url>
 
     </properties>
 
@@ -131,6 +166,33 @@
 
     <build>
         <plugins>
+
+            <!-- If you wish to host your maven site on github then enable this plugin.
+                    mvn site will deploy the site to your github page,
+                    e.g. http://USERNAME.github.io/REPOSITORY.
+
+                    This requires you to provide the following properties:
+                    <github.global.server>github</github.global.server>
+                           ::where github is defined as a server in your settings.xml::
+                    <url>https://github.com/USERNAME/REPOSITORY</url>
+
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site</phase>
+                    </execution>
+                </executions>
+            </plugin>-->
+
             <!-- JUnit tests -->
             <!-- exclude integration tests from normal build -->
             <plugin>
@@ -364,25 +426,6 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
     <profiles>
         <profile>

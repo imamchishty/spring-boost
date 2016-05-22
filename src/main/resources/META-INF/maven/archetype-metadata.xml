@@ -10,6 +10,7 @@
                 <include>run.sh</include>
                 <include>plugin.sh</include>
                 <include>README.txt</include>
+                <include>.gitignore</include>
             </includes>
         </fileSet>
 
