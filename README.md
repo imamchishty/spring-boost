@@ -1,5 +1,7 @@
 # Spring Boost
 
+[![Build Status](https://travis-ci.org/imamchishty/spring-boost.svg?branch=master "spring-boost")](https://travis-ci.org/imamchishty/spring-boost) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost)
+
 ## What the hell is it? 
 Spring Boost is a Maven Archetype that helps to create a multi-module maven project.
  
@@ -12,44 +14,52 @@ I however wanted separated modules, default controllers (ping, help), settings (
 
 The following modules are generated:
 
-* Exception - contains default a default runtime exception, business codes (similar concept to HTTP codes) and a client exception model.
+- **Exception** - contains default a default runtime exception, business codes (similar concept to HTTP codes) and a client exception model.
 
-* Model - a module which should house DTOs, JavaBeans etc. 
+- **Model** - a module which should house DTOs, JavaBeans etc. 
 
-* Service - default is empty, but this is where my services would be housed. 
+- **Service** - default is empty, but this is where my services would be housed. 
 
-* Rest - Spring controllers are here. 
+- **Rest** - Spring controllers are here. 
+
+- **Domain** - domain layer, for example repos/entities sit here (as should your core logic). 
+
+## Edge Services
+
+Bundled in the cloud-servers folder you'll see the following servers (each with a run.sh script):
+
+* cloud-config - spring cloud config, runs on port 8070, please see the application.yml for some useful tips.
+
+* cloud-eureka - netflix eureka (service registration & discovery), run on port 8071, the application.yml in rest module points to this.
+
+* cloud-turbine - netflix central dashboard, runs on port 8073.
+
+* cloud-zuul - API gateway, see the bootstrap.yml file (in the cloud-zuul folder) for examples. By default it blocks /admin and permits /api/**.
+
+At the root of the cloud-servers folder you'll see a pom.xml, this allows you to control the version of spring-cloud-parent for the servers, currently set to BRIXTON. It is useful to have these servers running locally when developing. In order to use these with the rest module you'll need to make a few changes, described in the rest module properties section later.
 
 ## Exception Module
 
-This module is used to provide a central and consistent way of handling exceptions. It contains the following:
+This module is used to provide a central and consistent way of handling exceptions. It heavily relies on [__exception-core__](https://github.com/imamchishty/exception-core) which provides a simple way to build exceptions. So in reality the exception-module is providing a reusable (centralised) list of business codes (for exceptional circumstances). It should be where all exception (common to the application) should be housed, an example is:
 
-1. BusinessCode - interface that expects implementations to provide a valid business code and description. 
-By providing business codes to the client we are able to clearly relate problems. 
-For example if a user has attempted to login but the password has expired then we could lets say return a code such as C100 - password expired. The codes should not be limited to validation, but rather it should cater for all circumstances, e.g. database connection has dropped. 
-
-2. BusinessException - this is just a runtime exception that provides some extra properties, such as a exception Id, correlation Id, list of params, http error codes etc. The exception Id is important for investigations and this is returned back to clients. The correlation Id is used whenever an external service call fails. That external service might return back an exception Id which we map to a correlation Id. This gives us complete end-to-end traceability.
-
-3. ClientExceptionModel - in order to be consistent with clients, whenever an exception occurs a exception handler converts that exception to this model. One important feature of this model is that it contains unqiue Id. This id can be easily linked to log files for further investigation.
-
-4. GlobalBusinessCodes - a list of business codes that have been defined. This is simply an implementation of BusinessCode.
-
+- **GlobalBusinessCodes** - a list of business codes that have been defined. This is simply an implementation of BusinessCode.
 
 ## Model Module
 
 Currently defaults to empty, but the aim of this module is to house all touch point models. For example the service returns something back to the rest tier. That something is probably a DTO and that DTO lives in the model module. One benefit is that we can easily package this module as a jar and provide to clients.
 
-## Service Module
+## Service and Domain Modules
 
-Also currently empty. But its obvious what it would be used for :)
+Also currently empty. But its obvious what they'd be used for :)
 
 ## Rest Module
 
 All HTTP requests are handled by this tier. This module is transformed into an executable JAR via spring boot. By default the following controllers are provided:
 
-1. PingController - a simple end point, via /ping, which returns HTTP 200 OK when running. This can be useful to see if the application is running.
-2. HelpController - /help provides a client with a list of all BusinessCodes and HTTP codes.
-3. ExceptionController - ControllerAdvice that handles all exceptions and maps them to the the ClientExceptionModel.
+1. PingController - a simple end point, via /api/ping, which returns HTTP 200 OK when running. This can be useful to see if the application is running. This controller also contains a Netflix Feign example available via /api/accounts - requires Eureka.
+2. HelpController - /api/help provides a client with a list of all BusinessCodes and HTTP codes.
+
+### Rest Module properties
 
 ## How do I create a new project using 'boost'?
 
