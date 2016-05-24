@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/imamchishty/spring-boost.svg?branch=master "spring-boost")](https://travis-ci.org/imamchishty/spring-boost) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost)
 
 ## What the hell is it? 
-Spring Boost is a Maven Archetype that helps to create a multi-module maven project.
+Spring Boost is a Maven Archetype that creates a spring boot multi-module maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy. The following sections will describe the features provided.
  
 ## Why did you need it?  
 Having worked on quite a few Spring Boot projects it became quite tedious to recreate the module structure that suited my needs, hence this 'booster'.
@@ -23,20 +23,6 @@ The following modules are generated:
 - **Rest** - Spring controllers are here. 
 
 - **Domain** - domain layer, for example repos/entities sit here (as should your core logic). 
-
-## Edge Services
-
-Bundled in the cloud-servers folder you'll see the following servers (each with a run.sh script):
-
-* cloud-config - spring cloud config, runs on port 8070, please see the application.yml for some useful tips.
-
-* cloud-eureka - netflix eureka (service registration & discovery), run on port 8071, the application.yml in rest module points to this.
-
-* cloud-turbine - netflix central dashboard, runs on port 8073.
-
-* cloud-zuul - API gateway, see the bootstrap.yml file (in the cloud-zuul folder) for examples. By default it blocks /admin and permits /api/**.
-
-At the root of the cloud-servers folder you'll see a pom.xml, this allows you to control the version of spring-cloud-parent for the servers, currently set to BRIXTON. It is useful to have these servers running locally when developing. In order to use these with the rest module you'll need to make a few changes, described in the rest module properties section later.
 
 ## Exception Module
 
@@ -59,7 +45,53 @@ All HTTP requests are handled by this tier. This module is transformed into an e
 1. PingController - a simple end point, via /api/ping, which returns HTTP 200 OK when running. This can be useful to see if the application is running. This controller also contains a Netflix Feign example available via /api/accounts - requires Eureka.
 2. HelpController - /api/help provides a client with a list of all BusinessCodes and HTTP codes.
 
+### Exception Handling
+
 ### Rest Module properties
+
+### Application.java - configuration
+
+### Swagger
+
+
+### Thread Context
+
+### Custom actuators
+
+### Netflix
+
+### Tracing requests
+
+### API endpoints
+
+### /api
+
+
+### /admin
+
+### Testing
+
+### Running the application
+
+### FIX_ME's
+
+## Delivery Pipeline
+
+## Maven site
+
+## Edge Services
+
+Bundled in the cloud-servers folder you'll see the following servers (each with a run.sh script):
+
+- **cloud-config** - spring cloud config, runs on port 8070, please see the application.yml for some useful tips.
+
+- **cloud-eureka** - netflix eureka (service registration & discovery), run on port 8071, the application.yml in rest module points to this.
+
+- **cloud-turbine** - netflix central dashboard, runs on port 8073.
+
+- **cloud-zuul** - API gateway running on port 8072, see the bootstrap.yml file (in the cloud-zuul folder) for examples. By default it blocks /admin and permits /api/**.
+
+At the root of the cloud-servers folder you'll see a pom.xml, this allows you to control the version of spring-cloud-parent for the servers, currently set to BRIXTON. It is useful to have these servers running locally when developing. In order to use these with the rest module you'll need to make a few changes, described in the rest module properties section later.
 
 ## How do I create a new project using 'boost'?
 
