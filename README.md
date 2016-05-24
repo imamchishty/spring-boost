@@ -30,6 +30,8 @@ This module is used to provide a central and consistent way of handling exceptio
 
 - **GlobalBusinessCodes** - a list of business codes that have been defined. This is simply an implementation of BusinessCode.
 
+Please note that the rest module also contains an exception controller.
+
 ## Model Module
 
 Currently defaults to empty, but the aim of this module is to house all touch point models. For example the service returns something back to the rest tier. That something is probably a DTO and that DTO lives in the model module. One benefit is that we can easily package this module as a jar and provide to clients.
@@ -42,19 +44,56 @@ Also currently empty. But its obvious what they'd be used for :)
 
 All HTTP requests are handled by this tier. This module is transformed into an executable JAR via spring boot. By default the following controllers are provided:
 
-1. PingController - a simple end point, via /api/ping, which returns HTTP 200 OK when running. This can be useful to see if the application is running. This controller also contains a Netflix Feign example available via /api/accounts - requires Eureka.
-2. HelpController - /api/help provides a client with a list of all BusinessCodes and HTTP codes.
+- **PingController** - a simple end point, via /api/ping, which returns HTTP 200 OK when running. This can be useful to see if the application is running. This controller also contains a Netflix Feign example available via /api/accounts - requires cloud-eureka to be running.
+
+- **HelpController** - /api/help provides a client with a list of all BusinessCodes and HTTP codes.
+
+- **BuildController** - provides build/git information via the git-build.properties, CI (if defined) and also maven.  
 
 ### Exception Handling
 
+When an exception is thrown the stack trace is useful for developers, however for clients it's not ideal and we need to 'convert' it so that it's much more manageable. It would also be great if we could provide a consistent 'error' model in exceptional circumstances. In order to achieve these and more spring-boost uses a exception controller component, [__exception-controller-spring__](https://github.com/imamchishty/exception-controller-spring). This component is activated via the __@EnableExceptionController__ in the Application class.
+
+This controller will handle all exceptions, and wrap them into an [__exception model__](https://github.com/imamchishty/exception-core). The controller also provides you access to the exception model + exception via interceptors.
+
+
 ### Rest Module properties
 
+- **bootstrap.yml** - 
+- **application.yml** - 
+- **git-build.properties** -
+- **log4j2.xml** -
+
 ### Application.java - configuration
+
+All configuration for the rest-module is done from within __Application__. The default config includes
+
+- Swagger @EnableSwagger2
+- Request Trace @EnableTraceRequestJpa Filter
+
+    @Bean
+    public FilterRegistrationBean requestIdFilterRegistrationBean() {
+     FilterRegistrationBean filter = new FilterRegistrationBean();
+     filter.setFilter(new RequestTraceFilter(appName, jpaTraceRequestService,
+     Arrays.asList(new DefaultLoggingHandler(), traceRequestHandler)));
+     filter.addUrlPatterns(ApiConstants.API_ROOT + "/*");
+ 
+     return filter;
+    }
+
+
+- Thread Context @EnableThreadContextAspect
+- Global Exception Handling @EnableExceptionController
+- Custom Actuators  @EnableActuatorsAndInterceptors
+- Netflix  @EnableDiscoveryClient @EnableFeignClients @EnableHystrix @EnableHystrixDashboard
+
 
 ### Swagger
 
 
 ### Thread Context
+
+
 
 ### Custom actuators
 
@@ -70,6 +109,8 @@ All HTTP requests are handled by this tier. This module is transformed into an e
 ### /admin
 
 ### Testing
+
+### Logging
 
 ### Running the application
 
