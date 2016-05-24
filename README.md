@@ -96,9 +96,34 @@ All configuration for the rest-module is done from within __Application__. The d
 
 ### API endpoints
 
-### /api
+API end points are managed in a simple Java Constants file, __ApiConstants__.
 
-### /admin
+#### /api
+
+By default anything under /api is where your clients interact with your services. /api/** should be permitted via the API Gateway (see the boostrap.yml in cloud-zuul for details).
+
+| URI                        | Description                                                            |
+| -------------------------- |:----------------------------------------------------------------------:|
+| /api/ping                  |  200 OK, end point to check service is running.                        |
+| /api/help                  | returns a list of all business codes as well as all HTTP ones.         |
+| /api/docs                  | Swagger API is available from this URI.                                |
+| /api/accounts              | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
+| /api/accounts/{id}/balance | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
+| /api/accounts/problems     | TEST endpoint to show how to exceptions are handled.                   |
+
+#### /admin
+
+All actuators are under /admin. These endpoints shouldn't be available to clients and it would be a good idea to block them from the API gateway (already done in cloud-zuul via bootstrap.yml).
+
+| URI                        | Description                                                            |
+| -------------------------- |:----------------------------------------------------------------------:|
+| /admin/ping                  |  200 OK, end point to check service is running.                        |
+| /admin/help                  | returns a list of all business codes as well as all HTTP ones.         |
+| /admin/docs                  | Swagger API is available from this URI.                                |
+| /admin/accounts              | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
+| /admin/accounts/{id}/balance | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
+| /admin/accounts/problems     | TEST endpoint to show how to exceptions are handled.                   |
+
 
 ### Testing
 
