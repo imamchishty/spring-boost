@@ -193,6 +193,13 @@
             </includes>
         </fileSet>
 
+        <fileSet filtered="false" encoding="UTF8">
+            <directory>__artifactId__-rest/src/main/resources</directory>
+            <includes>
+                <include>log4j2.xml</include>
+            </includes>
+        </fileSet>
+
         <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-rest/src/main/resources</directory>
             <includes>
@@ -200,7 +207,6 @@
                 <include>banner.txt</include>
                 <include>bootstrap.yml</include>
                 <include>git.properties</include>
-                <include>logback.xml</include>
             </includes>
         </fileSet>
 

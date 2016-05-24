@@ -81,6 +81,8 @@
         <ci.build>${BUILD_NUMBER}</ci.build>
         <ci.url>${BUILD_URL}</ci.url>
 
+        <!-- Log4j version -->
+        <log4j2.version>2.5</log4j2.version>
     </properties>
 
     <dependencyManagement>
@@ -161,6 +163,38 @@
                 <artifactId>spring-actuator</artifactId>
                 <version>1.0.1</version>
             </dependency>
+
+            <!-- Logging - version not via spring boot parent -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.19</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

@@ -74,11 +74,55 @@
             <artifactId>spring-actuator</artifactId>
         </dependency>
 
+        <!-- Logging via SLF4J & log4j2 -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+        </dependency>
+
         <!-- Spring -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -96,7 +140,7 @@
             <artifactId>hal-browser</artifactId>
         </dependency>
 
-        <!-- DB added for inmemory purposes, change accordingly -->
+        <!-- FIXME: DB added for inmemory purposes, change accordingly -->
         <!-- This db is also used by the trace-request-jpa module and the settings are
         set in the application.yml -->
         <dependency>
@@ -137,7 +181,7 @@
             <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
         </dependency>
 
-        <!-- Swagger http://host:port/docs-->
+        <!-- Swagger http://host:port/api/docs-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -178,14 +222,9 @@
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.txt</include>
                 </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <excludes>
-                    <exclude>**/*.xml</exclude>
-                </excludes>
             </resource>
         </resources>
 

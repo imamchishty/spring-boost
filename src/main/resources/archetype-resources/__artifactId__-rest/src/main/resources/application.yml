@@ -21,7 +21,7 @@ management.contextPath: /admin
 # Custom actuators
 exception.interceptor.queue.size: 50
 exception.interceptor.endpoint: exceptions
-exception.interceptor.stacktrace: true
+exception.interceptor.stacktrace: false
 trace.interceptor.queue.size: 50
 trace.interceptor.endpoint: requests
 
