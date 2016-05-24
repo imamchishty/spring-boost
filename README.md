@@ -60,40 +60,33 @@ This controller will handle all exceptions, and wrap them into an [__exception m
 ### Rest Module properties
 
 - **bootstrap.yml** - 
+
 - **application.yml** - 
+
 - **git-build.properties** -
+
 - **log4j2.xml** -
 
 ### Application.java - configuration
 
 All configuration for the rest-module is done from within __Application__. The default config includes
 
-- Swagger @EnableSwagger2
-- Request Trace @EnableTraceRequestJpa Filter
+- **Swagger** - swagger is configured using both  __@EnableSwagger2__ and some bean definitions with the __Application__ class.
 
-    @Bean
-    public FilterRegistrationBean requestIdFilterRegistrationBean() {
-     FilterRegistrationBean filter = new FilterRegistrationBean();
-     filter.setFilter(new RequestTraceFilter(appName, jpaTraceRequestService,
-     Arrays.asList(new DefaultLoggingHandler(), traceRequestHandler)));
-     filter.addUrlPatterns(ApiConstants.API_ROOT + "/*");
- 
-     return filter;
-    }
+- [**Request Trace**](https://github.com/imamchishty/trace-request-filter) - Enabled using the __@EnableTraceRequestJpa__ annotation. The filter is also configured as a bean. You can add other interceptors if you choose.
 
+- [**Thread Context**](https://github.com/imamchishty/thread-context-aspect) -  @EnableThreadContextAspect
 
-- Thread Context @EnableThreadContextAspect
-- Global Exception Handling @EnableExceptionController
-- Custom Actuators  @EnableActuatorsAndInterceptors
+- [**Global Exception Handling**](https://github.com/imamchishty/exception-controller-spring) @EnableExceptionController
+
+- [**Custom Actuators**](https://github.com/imamchishty/spring-actuator)  @EnableActuatorsAndInterceptors
+
 - Netflix  @EnableDiscoveryClient @EnableFeignClients @EnableHystrix @EnableHystrixDashboard
-
 
 ### Swagger
 
 
 ### Thread Context
-
-
 
 ### Custom actuators
 
@@ -104,7 +97,6 @@ All configuration for the rest-module is done from within __Application__. The d
 ### API endpoints
 
 ### /api
-
 
 ### /admin
 
