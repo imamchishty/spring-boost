@@ -82,13 +82,13 @@ All configuration for the rest-module is done from within __Application__. The d
 
 - [**Request Trace**](https://github.com/imamchishty/trace-request-filter) - Enabled using the __@EnableTraceRequestJpa__ annotation. The filter is also configured as a bean. You can add other interceptors if you choose.
 
-- [**Thread Context**](https://github.com/imamchishty/thread-context-aspect) -  @EnableThreadContextAspect
+- [**Thread Context**](https://github.com/imamchishty/thread-context-aspect) -  @EnableThreadContextAspect, see project for details.
 
-- [**Global Exception Handling**](https://github.com/imamchishty/exception-controller-spring) @EnableExceptionController
+- [**Global Exception Handling**](https://github.com/imamchishty/exception-controller-spring) - @EnableExceptionController, see project for details.
 
-- [**Custom Actuators**](https://github.com/imamchishty/spring-actuator)  @EnableActuatorsAndInterceptors
+- [**Custom Actuators**](https://github.com/imamchishty/spring-actuator) - @EnableActuatorsAndInterceptors, see project for details.
 
-- Netflix  @EnableDiscoveryClient @EnableFeignClients @EnableHystrix @EnableHystrixDashboard
+- [**Netflix**] - @EnableDiscoveryClient, @EnableFeignClients, @EnableHystrix, @EnableHystrixDashboard, refer to spring boot docs.
 
 ### Swagger
 
@@ -100,9 +100,11 @@ Swagger runs at /api/docs
 
 ### Custom actuators
 
-
+[**Custom Actuators**](https://github.com/imamchishty/spring-actuator) available at `/admin/health`, `/admin/requests`, `/admin/exceptions`
 
 ### Netflix
+
+A Feign example has been added to the PingController, /api/accounts, please take a look at the `.../feign` package in the rest module.
 
 ### Tracing requests
 
@@ -158,6 +160,7 @@ Three types of tests are included (all within the rest module).
 
 - **Stress Testing** - JMeter has been added with a single test for the /api/ping end point. This should provide an example from which you can add more rest tests. The jmeter test is found in the rest module/src/test/jmeter/Microservice test plan.jmx. If you have JMeter locally then you can open the file and run it. Alternatively you can run this via mvn jmeter:jmeter. Please note that it'll expect the app to be running on localhost:8080, but you can change the location for example, `mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080`.
 
+In the future cucumber will also be added.
 
 ### Logging
 
@@ -173,9 +176,17 @@ If you look at the log4j2.xml file you'll see that it creates four files:
 
 - **xxx-trace-requests.log** - all handled requests by the application, refer to trace requests from earlier for more details.
 
+In the future a xxx-audit.log will be added which will be filled via the `@ThreadContext`.
+
 ### Running the application
 
+`./run.sh development skip`
+
+`mvn spring-boot:run`
+
 ### FIX_ME's
+
+Search for FIXME in the parent pom.
 
 ## Delivery Pipeline
 
@@ -214,8 +225,7 @@ At the root of the cloud-servers folder you'll see a pom.xml, this allows you to
 Spring-boost is available in maven central and bintray so you don't need to build the project locally.
 To run the archetype:
 
-
-mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.0.2 -DinteractiveMode=false -q
+mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.4.0 -DinteractiveMode=false -q
 
 Example:
 
