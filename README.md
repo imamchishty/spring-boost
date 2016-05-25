@@ -66,13 +66,13 @@ In the above you can see `exception.interceptor.endpoint` set to `exceptions` th
 
 ### Rest Module properties
 
-- **bootstrap.yml** - 
+- **bootstrap.yml**
 
-- **application.yml** - 
+- **application.yml** 
 
-- **git-build.properties** -
+- **git-build.properties**
 
-- **log4j2.xml** -
+- **log4j2.xml**
 
 ### Application.java - configuration
 
@@ -92,10 +92,15 @@ All configuration for the rest-module is done from within __Application__. The d
 
 ### Swagger
 
+Swagger runs at /api/docs
 
 ### Thread Context
 
+[__@ThreadContext__](https://github.com/imamchishty/thread-context-aspect) sets the thread name with mutliple params. Please refer to the project for more details.
+
 ### Custom actuators
+
+
 
 ### Netflix
 
@@ -113,7 +118,7 @@ API end points are managed in a simple Java Constants file, __ApiConstants__.
 By default anything under /api is where your clients interact with your services. /api/** should be permitted via the API Gateway (see the boostrap.yml in cloud-zuul for details).
 
 | URI                        | Description                                                            |
-| -------------------------- |:----------------------------------------------------------------------:|
+| -------------------------- |----------------------------------------------------------------------|
 | /api/ping                  |  200 OK, end point to check service is running.                        |
 | /api/help                  | returns a list of all business codes as well as all HTTP ones.         |
 | /api/docs                  | Swagger API is available from this URI.                                |
@@ -126,7 +131,7 @@ By default anything under /api is where your clients interact with your services
 All actuators are under /admin. These endpoints shouldn't be available to clients and it would be a good idea to block them from the API gateway (already done in cloud-zuul via bootstrap.yml).
 
 | URI                        | Description                                                            |
-| -------------------------- |:----------------------------------------------------------------------:|
+| -------------------------- |----------------------------------------------------------------------|
 | /admin/build |  Build, git, ci information. Mainly taken from git-build.properties |
 | /admin/exceptions | Custom end point that shows the last n number of exceptions, please see the exception handling section for more details.|
 | /admin/requests | The trace request filter + interceptors can provide lots of details of requests. For more details see 'tracing requests' | 
@@ -145,7 +150,28 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 
 ### Testing
 
+Three types of tests are included (all within the rest module).
+
+- **Unit Tests** - your typical mocked tests, executed via mvn test
+
+- **Integration Tests** -  run with the spring context initialised, ignored with mvn test, executed via mvn failsafe:integration-test. This only includes files with a specific naming convention, please see the parent-pom for more details.
+
+- **Stress Testing** - JMeter has been added with a single test for the /api/ping end point. This should provide an example from which you can add more rest tests. The jmeter test is found in the rest module/src/test/jmeter/Microservice test plan.jmx. If you have JMeter locally then you can open the file and run it. Alternatively you can run this via mvn jmeter:jmeter. Please note that it'll expect the app to be running on localhost:8080, but you can change the location for example, `mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080`.
+
+
 ### Logging
+
+Logging is done via log4j2. A default config file is available in the rest module/src/main/resources folder. 
+Please modify the file as required, especially the LOG_PATH property - currently set to the target/logs folder. This would be a good candidate for using a system property.
+If you look at the log4j2.xml file you'll see that it creates four files:
+
+- **xxx-error.log** - all exceptions thrown/handled by the application (via the exception controller mentioned earlier) are logged here. 
+
+- **xxx.log** - all application logs (non error).
+
+- **xxx-third-party.log** - third party logs, I like to keep 'my' logs separate to prevent pollution.
+
+- **xxx-trace-requests.log** - all handled requests by the application, refer to trace requests from earlier for more details.
 
 ### Running the application
 
@@ -153,7 +179,21 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 
 ## Delivery Pipeline
 
+Please note that you'll need to make some changes to the parent pom, just search for FIXME. Some of things that need changing are the CI link.
+
+You can use the goals and plugins defined to create a pipeline. For example:
+
+- mvn clean compile
+- mvn test
+- mvn failsafe:integration-test
+- mvn jmeter:jmeter
+- mvn findbugs:findbugs
+- mvn pmd:pmd
+- mvn site
+
 ## Maven site
+
+By default each module has a maven site. Just look at the src/site folder. In the parents src folder you'll also find a changes folder, this contains a simple changes file which can be used as a releases journal. This gets added to the maven site when created. You can also deploy the maven site to your github pages although the default behaviour is to use a repo such as Nexus. Details and help for this is in the parent pom.
 
 ## Edge Services
 
