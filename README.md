@@ -3,12 +3,15 @@
 [![Build Status](https://travis-ci.org/imamchishty/spring-boost.svg?branch=master "spring-boost")](https://travis-ci.org/imamchishty/spring-boost) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost)
 
 ## What the hell is it? 
-Spring Boost is a Maven Archetype that creates a spring boot multi-module maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy. The following sections will describe the features provided.
- 
-## Why did you need it?  
-Having worked on quite a few Spring Boot projects it became quite tedious to recreate the module structure that suited my needs, hence this 'booster'.
-Spring Initializr is great and probably is good enough for most projects. 
-I however wanted separated modules, default controllers (ping, help), settings (application.yml), logging etc.
+Spring Boost is a Maven Archetype that creates a spring boot multi-module maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy. The following sections will describe the features provided. 
+
+- __Spring Boot template project for microservice__
+- __Multi-module project__
+- __Configured with appropriate plugins & dependencies__
+- __Utilises custom components__
+- __Examples (Jmeter, Feign etc)__
+- __Consistent__
+
 
 ## Maven Modules
 
@@ -93,6 +96,56 @@ All configuration for the rest-module is done from within __Application__. The d
 ### Swagger
 
 Swagger runs at /api/docs
+
+### Custom Components
+
+Exception-core
+Generic runtime exception
+Error codes
+
+Exception-spring-controller
+Handles all exceptions
+Flexibility via ‘Inteceptors’.
+
+Thread-context
+Great for seeing the thread meta-data.
+Very useful for debugging, e.g. blocked thread.
+Could be used for auditing.
+Used for debugging applications.
+Sets the context (time, method, params, requestId etc) to the executing thread name.
+@ThreadContext
+@Ignore – used to protect specific params
+Threads can be monitored with tools such as JMC.
+
+
+
+Trace-requests
+Trace distributed API calls (shows exceptions as well).
+Libraries that combine to enable tracing of distributed calls.
+Gives full visibility to the execution path.
+Live status’s of requests, RUNNING, FAILED, COMPLETED.
+Linked to exceptions
+Provides ability to extend via inteceptors.
+Plug and play service/persistent as required.
+Visually see requests.
+
+RequestId: unique ID when a call is made to a service. This acts as the PK of the request.
+GroupId: services interact with other services. The entire execution path is grouped using a groupId. Searching on this will show ALL interactions.
+CallerId: when a service calls another service we know who the caller was by this property. The caller sets the callerId using their requestId.
+ApplicationId: Defaults to the name of the application.
+
+Filter
+Regular servlet filter
+Can be used outside of Spring 
+Creates/sets the required headers
+Extendable via API interceptors
+Filter is not aware of implementation, contract via the API module.
+
+
+
+End points
+
+
 
 ### Thread Context
 
