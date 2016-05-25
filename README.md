@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/imamchishty/spring-boost.svg?branch=master "spring-boost")](https://travis-ci.org/imamchishty/spring-boost) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.shedhack.tool/spring-boost)
 
 ## What the hell is it? 
-Spring Boost is a Maven Archetype that creates a spring boot multi-module maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy. The following sections will describe the features provided. 
+Spring Boost is a Maven Archetype that creates a spring boot multi-module maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy.  
 
 __Key features:__
 
@@ -76,17 +76,18 @@ In the above you can see `exception.interceptor.endpoint` set to `exceptions` th
 
 #### Exception chain
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/exception-flow.jpg?raw=true "Exception Chain")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/exception-flow.jpg?raw=true "Exception Chain")
+
 
 #### Client Model for exceptions 
 
 __Attributes:__
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/client-model.jpg?raw=true "Client Model for exceptions")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/client-model.jpg?raw=true "Client Model for exceptions")
 
 #### /admin/exceptions
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/client-model2.jpg?raw=true "/admin/exceptions")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/client-model2.jpg?raw=true "/admin/exceptions")
 
 ### Rest Module properties
 
@@ -148,7 +149,7 @@ __Key features:__
 
 A Feign example has been added to the PingController, /api/accounts, please take a look at the `.../feign` package in the rest module.
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/feign.jpg?raw=true "Feign example, /api/accounts")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/feign.jpg?raw=true "Feign example, /api/accounts")
 
 ### Tracing requests
 
@@ -202,7 +203,7 @@ You can view requests at this end-point. The following properties currently set 
 
 #### Visualise requests (requires another project)
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/trace-viewer.jpg?raw=true "Trace Requests Viewer")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/trace-viewer.jpg?raw=true "Trace Requests Viewer")
 
 ### API endpoints
 
@@ -223,9 +224,9 @@ By default anything under /api is where your clients interact with your services
 
 #### Example images from /api/...
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/api-help.jpg?raw=true "/api/help")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/api-help.jpg?raw=true "/api/help")
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/api-docs.jpg?raw=true "/api/docs")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/api-docs.jpg?raw=true "/api/docs")
 
 #### /admin
 
@@ -250,11 +251,11 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 
 #### Example images from /admin/...
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-requests.jpg?raw=true "/admin/requests")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/admin-requests.jpg?raw=true "/admin/requests")
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-exceptions.jpg?raw=true "/admin/exceptions")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/admin-exceptions.jpg?raw=true "/admin/exceptions")
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-health.jpg?raw=true "/admin/health")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/admin-health.jpg?raw=true "/admin/health")
 
 
 ### Testing
@@ -267,7 +268,7 @@ Three types of tests are included (all within the rest module).
 
 - **Stress Testing** - JMeter has been added with a single test for the /api/ping end point. This should provide an example from which you can add more rest tests. The jmeter test is found in the rest module/src/test/jmeter/Microservice test plan.jmx. If you have JMeter locally then you can open the file and run it. Alternatively you can run this via mvn jmeter:jmeter. Please note that it'll expect the app to be running on localhost:8080, but you can change the location for example, `mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080`.
 
-![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/jmeter.jpg?raw=true "JMeter")
+![alt tag](https://github.com/imamchishty/spring-boost/blob/master/resources/jmeter.jpg?raw=true "JMeter")
 
 
 In the future cucumber will also be added.
