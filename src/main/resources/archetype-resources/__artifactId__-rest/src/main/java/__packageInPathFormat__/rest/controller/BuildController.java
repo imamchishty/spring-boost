@@ -3,6 +3,7 @@ package ${package}.rest.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -117,7 +118,7 @@ public class BuildController {
         build.put(ciUrlKey, ciUrlVal);
     }
 
-    @RequestMapping(ApiConstants.API_MAN_BUILD)
+    @RequestMapping(ApiConstants.API_MAN_BUILD, method = RequestMethod.GET)
     public Map<String, Object> build() {
         return build;
     }

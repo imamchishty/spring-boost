@@ -20,9 +20,8 @@ server:
   port: 8072
 
 # Add the paths for the Gateway
-# XXX is the name of your app, e.g. X-rest and YYY is the endpoint you'd access
 zuul:
   ignoredPatterns: /**/admin/**
-  routes.XXX:
-    path: /YYY/**
+  routes.${artifactId}-rest:
+    path: /${artifactId}-rest/**
     #url: http://localhost:8080 -- url is not required if eureka is being used

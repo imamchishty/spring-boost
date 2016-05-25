@@ -283,7 +283,7 @@
         </fileSet>
 
         <!-- Create cloud servers directory-->
-        <fileSet filtered="false" encoding="UTF8">
+        <fileSet filtered="true" encoding="UTF8">
             <directory>cloud-servers</directory>
             <includes>
                 <include>**/*.*</include>

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class HelpController {
         codes.put("httpCodes", httpCodes);
     }
 
-    @RequestMapping(path = ApiConstants.API_HELP)
+    @RequestMapping(path = ApiConstants.API_HELP, method = RequestMethod.GET)
     public ResponseEntity help(){
         return new ResponseEntity(codes, HttpStatus.OK);
     }
