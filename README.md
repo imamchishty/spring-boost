@@ -76,9 +76,17 @@ In the above you can see `exception.interceptor.endpoint` set to `exceptions` th
 
 #### Exception chain
 
-[Exception Chain](https://github.com/imamchishty/spring-boost/tree/master/resources/exception-flow.jpg)
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/exception-flow.jpg?raw=true "Exception Chain")
 
+#### Client Model for exceptions 
 
+__Attributes:__
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/client-model.jpg?raw=true "Client Model for exceptions")
+
+#### /admin/exceptions
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/client-model2.jpg?raw=true "/admin/exceptions")
 
 ### Rest Module properties
 
@@ -110,7 +118,6 @@ All configuration for the rest-module is done from within __Application__. The d
 
 Swagger available at /api/docs.
 
-
 ### Thread Context
 
 [__@ThreadContext__](https://github.com/imamchishty/thread-context-aspect) sets the thread name with mutliple params, please refer to the project [here]((https://github.com/imamchishty/thread-context-aspect)). 
@@ -140,6 +147,8 @@ __Key features:__
 ### Netflix
 
 A Feign example has been added to the PingController, /api/accounts, please take a look at the `.../feign` package in the rest module.
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/feign.jpg?raw=true "Feign example, /api/accounts")
 
 ### Tracing requests
 
@@ -190,6 +199,11 @@ You can view requests at this end-point. The following properties currently set 
     trace.interceptor.queue.size: 50
     trace.interceptor.endpoint: requests
 
+
+#### Visualise requests (requires another project)
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/trace-viewer.jpg?raw=true "Trace Requests Viewer")
+
 ### API endpoints
 
 API end points are managed in a simple Java Constants file, __ApiConstants__.
@@ -206,6 +220,12 @@ By default anything under /api is where your clients interact with your services
 | /api/accounts              | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
 | /api/accounts/{id}/balance | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
 | /api/accounts/problems     | TEST endpoint to show how to exceptions are handled.                   |
+
+#### Example images from /api/...
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/api-help.jpg?raw=true "/api/help")
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/api-docs.jpg?raw=true "/api/docs")
 
 #### /admin
 
@@ -228,6 +248,14 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 | /admin/trace | Spring actuator |
 | /admin/docs | Spring actuator |
 
+#### Example images from /admin/...
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-requests.jpg?raw=true "/admin/requests")
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-exceptions.jpg?raw=true "/admin/exceptions")
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/admin-health.jpg?raw=true "/admin/health")
+
 
 ### Testing
 
@@ -238,6 +266,9 @@ Three types of tests are included (all within the rest module).
 - **Integration Tests** -  run with the spring context initialised, ignored with mvn test, executed via mvn failsafe:integration-test. This only includes files with a specific naming convention, please see the parent-pom for more details.
 
 - **Stress Testing** - JMeter has been added with a single test for the /api/ping end point. This should provide an example from which you can add more rest tests. The jmeter test is found in the rest module/src/test/jmeter/Microservice test plan.jmx. If you have JMeter locally then you can open the file and run it. Alternatively you can run this via mvn jmeter:jmeter. Please note that it'll expect the app to be running on localhost:8080, but you can change the location for example, `mvn clean jmeter:jmeter -Dhost=localhost -Dport=8080`.
+
+![alt tag](https://github.com/imamchishty/spring-boost/tree/master/resources/jmeter.jpg?raw=true "JMeter")
+
 
 In the future cucumber will also be added.
 
