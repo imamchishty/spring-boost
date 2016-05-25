@@ -56,6 +56,13 @@ When an exception is thrown the stack trace is useful for developers, however fo
 
 This controller will handle all exceptions, and wrap them into an [__exception model__](https://github.com/imamchishty/exception-core). The controller also provides you access to the exception model + exception via interceptors.
 
+Two admin endpoints are available that provide an exceptions count (/admin/health) and also details of the last n number of exceptions (in detail) via /admin/exceptions. You can configure the size of the ring buffer (used to store the last n number of exceptions) by changing:
+
+    exception.interceptor.queue.size: 50
+    exception.interceptor.endpoint: exceptions
+    exception.interceptor.stacktrace: false
+
+In the above you can see `exception.interceptor.endpoint` set to `exceptions` this maps to /admin/exceptions. You can change it if required.
 
 ### Rest Module properties
 
@@ -94,6 +101,9 @@ All configuration for the rest-module is done from within __Application__. The d
 
 ### Tracing requests
 
+    trace.interceptor.queue.size: 50
+    trace.interceptor.endpoint: requests
+
 ### API endpoints
 
 API end points are managed in a simple Java Constants file, __ApiConstants__.
@@ -117,12 +127,20 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 
 | URI                        | Description                                                            |
 | -------------------------- |:----------------------------------------------------------------------:|
-| /admin/ping                  |  200 OK, end point to check service is running.                        |
-| /admin/help                  | returns a list of all business codes as well as all HTTP ones.         |
-| /admin/docs                  | Swagger API is available from this URI.                                |
-| /admin/accounts              | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
-| /admin/accounts/{id}/balance | TEST endpoint to show how to work with Feign, Hystrix and Eureka.      |
-| /admin/accounts/problems     | TEST endpoint to show how to exceptions are handled.                   |
+| /admin/build |  Build, git, ci information. Mainly taken from git-build.properties |
+| /admin/exceptions | Custom end point that shows the last n number of exceptions, please see the exception handling section for more details.|
+| /admin/requests | The trace request filter + interceptors can provide lots of details of requests. For more details see 'tracing requests' | 
+| /admin/health | Spring actuator with some extra exceptions details |
+| /admin/autoconfig | Spring actuator |
+| /admin/beans  | Spring actuator |
+|/admin/configprops  | Spring actuator |
+| /admin/dump | Spring actuator |
+| /admin/env | Spring actuator |
+| /admin/info | Spring actuator |
+| /admin/mappings | Spring actuator |
+| /admin/metrics | Spring actuator |
+| /admin/trace | Spring actuator |
+| /admin/docs | Spring actuator |
 
 
 ### Testing
