@@ -25,19 +25,6 @@ exception.interceptor.stacktrace: false
 trace.interceptor.queue.size: 50
 trace.interceptor.endpoint: requests
 
-
-# Trace Request JPA requires these settings
-# Please modify for your desired DB. Currently uses an inmemory instance of HSQL.
-trace-request:
-  hibernate:
-    hbm2ddl.auto: create-drop
-    dialect: org.hibernate.dialect.HSQLDialect
-  jdbc:
-    driverClassName: org.hsqldb.jdbc.JDBCDriver
-    url: jdbc:hsqldb:file:request
-    user: SA
-    pass:
-
 # Properties used by /admin/info and /admin/build endpoints.
 info.app.name: ${spring.application.name}
 info.app.profile: ${spring.profiles.active}

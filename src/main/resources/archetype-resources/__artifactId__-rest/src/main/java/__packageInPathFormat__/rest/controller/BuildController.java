@@ -118,7 +118,7 @@ public class BuildController {
         build.put(ciUrlKey, ciUrlVal);
     }
 
-    @RequestMapping(ApiConstants.API_MAN_BUILD, method = RequestMethod.GET)
+    @RequestMapping(value = ApiConstants.API_MAN_BUILD, method = RequestMethod.GET)
     public Map<String, Object> build() {
         return build;
     }

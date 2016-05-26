@@ -70,6 +70,18 @@
 
         </RollingFile>
 
+        <!-- Audit trail, via @ThreadContext (com.shedhack.thread.context.handler) -->
+        <RollingFile name="${APPLICATION_NAME}-audit"
+                     fileName="${LOG_PATH}/${APPLICATION_NAME}-audit.log"
+                     filePattern="${LOG_PATH}/${APPLICATION_NAME}-audit-${LOG_FILE_ARCHIVE_PATTERN}.log" append="true">
+
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${LOG_FILE_SIZE}"/>
+            </Policies>
+
+        </RollingFile>
+
         <!-- Trace Request: via com.shedhack.trace.request.filter.RequestTraceFilter and provided interceptors -->
         <RollingFile name="${APPLICATION_NAME}-trace-request"
                      fileName="${LOG_PATH}/${APPLICATION_NAME}-trace-request.log"
@@ -121,8 +133,13 @@
             <AppenderRef ref="${APPLICATION_NAME}-error"/>
         </Logger>
 
-        <!-- Trace Request logs, requires INFO level -->
-        <Logger name="com.shedhack.trace" level="info" additivity="false">
+        <!-- Thread Context Aspect Audit Trail log -->
+        <Logger name="com.shedhack.thread.context.handler" level="info" additivity="false">
+            <AppenderRef ref="${APPLICATION_NAME}-audit"/>
+        </Logger>
+
+        <!-- Trace Request logs via request filter, requires INFO level -->
+        <Logger name="com.shedhack.trace.request.filter" level="info" additivity="false">
             <AppenderRef ref="${APPLICATION_NAME}-trace-request"/>
         </Logger>
 

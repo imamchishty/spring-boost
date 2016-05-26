@@ -33,6 +33,13 @@
             <artifactId>${artifactId}-domain</artifactId>
         </dependency>
 
+        <!-- Shedhack dependencies -->
+
+        <dependency>
+            <groupId>com.shedhack.thread</groupId>
+            <artifactId>thread-context-handler</artifactId>
+        </dependency>
+
         <!-- External dependencies -->
 
         <dependency>

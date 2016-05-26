@@ -3,12 +3,11 @@ package ${package}.rest;
 import ${package}.rest.constant.ApiConstants;
 import com.shedhack.exception.controller.spring.config.EnableExceptionController;
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
-import com.shedhack.spring.actuator.interceptor.TraceRequestHandler;
-import com.shedhack.thread.context.config.EnableThreadContextAspect;
+import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
+import com.shedhack.thread.context.config.EnableThreadContextAspectWithLogging;
 import com.shedhack.trace.request.api.service.TraceRequestService;
-import com.shedhack.trace.request.filter.DefaultLoggingHandler;
+import com.shedhack.trace.request.filter.DefaultTraceRequestInterceptor;
 import com.shedhack.trace.request.filter.RequestTraceFilter;
-import com.shedhack.trace.request.jpa.config.EnableTraceRequestJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -36,9 +35,8 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableSwagger2
-@EnableTraceRequestJpa
 @EnableExceptionController
-@EnableThreadContextAspect
+@EnableThreadContextAspectWithLogging
 @EnableActuatorsAndInterceptors
 @PropertySources(value = {
         @PropertySource(value = "classpath:/git-build.properties")
@@ -56,27 +54,18 @@ public class Application extends WebMvcConfigurerAdapter {
     @Value("${spring.application.name}")
     private String appName;
 
-    /**
-     * Service is configured via {@link EnableTraceRequestJpa}
-     */
     @Autowired
-    private TraceRequestService jpaTraceRequestService;
-
-    /**
-     * Service is configured via @EnableActuatorsAndInterceptors
-     */
-    @Autowired
-    private TraceRequestHandler traceRequestHandler;
+    private ActuatorTraceRequestInterceptor actuatorTraceRequestInterceptor;
 
     /**
      * Filter records and logs all HTTP requests.
-     * This requires an implementation of {@link TraceRequestService}.
+     * This requires implementation(s) of TraceRequestInterceptors.
      */
     @Bean
     public FilterRegistrationBean requestIdFilterRegistrationBean() {
         FilterRegistrationBean filter = new FilterRegistrationBean();
-        filter.setFilter(new RequestTraceFilter(appName, jpaTraceRequestService,
-                Arrays.asList(new DefaultLoggingHandler(), traceRequestHandler)));
+        filter.setFilter(new RequestTraceFilter(appName,
+                Arrays.asList(new DefaultTraceRequestInterceptor(), actuatorTraceRequestInterceptor)));
         filter.addUrlPatterns(ApiConstants.API_ROOT + "/*");
 
         return filter;
