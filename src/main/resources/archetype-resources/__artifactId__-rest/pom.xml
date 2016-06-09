@@ -292,7 +292,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Docker plugin -->
+            <!-- Docker plugin - docker:build ALWAYS requires to be called after mvn package!!!!!-->
             <!-- docker:build, docker:start, docker:stop, docker:watch, docker:remove, docker:logs, docker:source -->
             <!-- -Ddocker.follow=true also a good option -->
             <!-- To find you docker ip address with docker machine: [docker-machine ip default] -->

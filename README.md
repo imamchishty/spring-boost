@@ -336,18 +336,26 @@ At the root of the cloud-servers folder you'll see a pom.xml, this allows you to
 Spring-boost is available in maven central and bintray so you don't need to build the project locally.
 To run the archetype:
 
-mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.4.0 -DinteractiveMode=false -q
+mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.5.0 -DinteractiveMode=false -q
 
 Example:
 
-     mvn archetype:generate -DgroupId=com.kungfu -DartifactId=panda -Dversion=1.0.0-SNAPSHOT -Dpackage=com.kungfu.panda -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.4.1 -DinteractiveMode=false -q
+     mvn archetype:generate -DgroupId=com.kungfu -DartifactId=panda -Dversion=1.0.0-SNAPSHOT -Dpackage=com.kungfu.panda -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.5.0 -DinteractiveMode=false -q
 
 This will create a project folder locally. Open that folder and the try to run the shell script, run.sh (you might need to chmod it, e.g. chmod u+x run.sh). The application should now run.
 
 ## Docker?
 
-A Dockerfile is generated using a Spotify plugin. This has been used in the rest module. To make use of it you need to start docker and then
+A Dockerfile is generated dynamically. This can be used for integration testing (although you'd need to add the execution goals accordingly).
 
 1. mvn package docker:build
-2. docker run -p 8080:8080 -t ${docker.image.prefix}/${project.artifactId}
-3. docker ps
+2. docker:run
+3. docker:stop
+
+You can add multiple images, e.g. for a backing service if required.
+
+Using docker with jmeter (host setting in this example is using docker machine):
+
+`mvn package -DskipTests docker:build docker:run -Ddocker.follow=false jmeter:jmeter -Dhost=192.168.99.100 -Dport=8080 docker:stop`
+
+
