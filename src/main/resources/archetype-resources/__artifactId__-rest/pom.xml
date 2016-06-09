@@ -297,7 +297,7 @@
             <!-- -Ddocker.follow=true also a good option -->
             <!-- To find you docker ip address with docker machine: [docker-machine ip default] -->
             <!-- When running on a mac you may need [eval "$(docker-machine env default)"] : with the quotes -->
-            <!-- Running with JMeter:
+            <!-- Running with JMeter (could also run integration tests 0 need to update the executions):
                 mvn package -DskipTests docker:build docker:run -Ddocker.follow=false jmeter:jmeter -Dhost=192.168.99.100 -Dport=8080 docker:stop
             -->
             <plugin>

@@ -346,7 +346,7 @@ This will create a project folder locally. Open that folder and the try to run t
 
 ## Docker?
 
-A Dockerfile is generated dynamically. This can be used for integration testing (although you'd need to add the execution goals accordingly).
+A Dockerfile is generated dynamically (see the rest pom file). This can be used for integration testing (although you'd need to add the execution goals accordingly).
 
 1. mvn package docker:build
 2. docker:run
