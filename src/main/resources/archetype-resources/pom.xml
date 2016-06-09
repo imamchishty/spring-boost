@@ -74,9 +74,6 @@
         <host>localhost</host>
         <port>8080</port>
 
-        <!-- docker settings -->
-        <docker.image.prefix>${project.groupId}</docker.image.prefix>
-
         <!-- CI settings -->
         <ci.build>${BUILD_NUMBER}</ci.build>
         <ci.url>${BUILD_URL}</ci.url>

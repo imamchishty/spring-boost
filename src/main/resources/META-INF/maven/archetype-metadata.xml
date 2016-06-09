@@ -166,13 +166,6 @@
         </fileSet>
 
         <fileSet filtered="true" encoding="UTF8">
-            <directory>__artifactId__-rest/src/main/docker</directory>
-            <includes>
-                <include>**/*.*</include>
-            </includes>
-        </fileSet>
-
-        <fileSet filtered="true" encoding="UTF8">
             <directory>__artifactId__-rest/src/main/java/__packageInPathFormat__/rest</directory>
             <includes>
                 <include>**/*.*</include>

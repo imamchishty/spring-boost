@@ -15,7 +15,12 @@
     <description>Module contains the restful controllers.</description>
 
     <properties>
-        <docker.image.prefix>${groupId}</docker.image.prefix>
+
+        <!-- Docker properties -->
+        <docker.image.name>${project.groupId}/${project.artifactId}:${project.version}</docker.image.name>
+        <docker.from>java:8u40</docker.from>
+        <docker.container.port>8080</docker.container.port>
+
     </properties>
 
     <dependencies>
@@ -287,31 +292,85 @@
                 </configuration>
             </plugin>
 
-            <!-- Creates the necessary docker file -->
+            <!-- Docker plugin -->
+            <!-- docker:build, docker:start, docker:stop, docker:watch, docker:remove, docker:logs, docker:source -->
+            <!-- -Ddocker.follow=true also a good option -->
+            <!-- To find you docker ip address with docker machine: [docker-machine ip default] -->
+            <!-- When running on a mac you may need [eval "$(docker-machine env default)"] : with the quotes -->
+            <!-- Running with JMeter:
+                mvn package -DskipTests docker:build docker:run -Ddocker.follow=false jmeter:jmeter -Dhost=192.168.99.100 -Dport=8080 docker:stop
+            -->
             <plugin>
-                <groupId>com.spotify</groupId>
+                <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.3.1</version>
+                <version>0.15.5</version>
                 <configuration>
+                    <verbose>true</verbose>
+                    <logDate>default</logDate>
+                    <autoPull>true</autoPull>
+                    <verbose>true</verbose>
+                    <images>
 
-                    <!-- You might need to remove dockerHost and let it default. This has been set for boot2docker -->
-                    <!-- When boot2docker starts you'll see, so export them!:
-                            To connect the Docker client to the Docker daemon, please set:
-                            export DOCKER_HOST=tcp://192.168.59.103:2376
-                            export DOCKER_CERT_PATH=/Users/ichishty/.boot2docker/certs/boot2docker-vm
-                            export DOCKER_TLS_VERIFY=1
-                    -->
-                    <dockerHost>https://192.168.59.103:2376</dockerHost>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
+                        <image>
+                            <alias>service</alias>
+                            <name>${docker.image.name}</name>
+
+                            <build>
+                                <from>${docker.from}</from>
+
+                                <assembly>
+                                    <basedir>/maven</basedir>
+                                    <inline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                            xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+                                            xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+                                        <dependencySets>
+                                            <dependencySet>
+                                                <includes>
+                                                    <include>${project.groupId}:${project.artifactId}</include>
+                                                </includes>
+                                                <outputDirectory>.</outputDirectory>
+                                                <outputFileNameMapping>app.war</outputFileNameMapping>
+                                            </dependencySet>
+                                        </dependencySets>
+                                    </inline>
+                                </assembly>
+
+                                <!-- Expose ports -->
+                                <ports>
+                                    <port>${docker.container.port}</port>
+                                </ports>
+
+                                <entryPoint>
+                                    <arg>java</arg>
+                                    <arg>-Djava.security.egd=file:/dev/./urandom</arg>
+                                    <arg>-jar</arg>
+                                    <arg>/maven/app.jar</arg>
+                                </entryPoint>
+                            </build>
+
+                            <run>
+                                <ports>
+                                    <port>${docker.container.port}:${docker.container.port}</port>
+                                </ports>
+
+                                <log>
+                                    <prefix>TC</prefix>
+                                    <color>cyan</color>
+                                </log>
+
+                                <wait>
+                                    <http>
+                                        <url>http://${docker.host.address}:${docker.container.port}</url>
+                                    </http>
+                                    <log>${docker.image.name} is ready.</log>
+                                    <time>20000</time>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
                 </configuration>
+
             </plugin>
 
         </plugins>
