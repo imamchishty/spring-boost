@@ -20,6 +20,7 @@
         <docker.image.name>${project.groupId}/${project.artifactId}:${project.version}</docker.image.name>
         <docker.from>java:8u40</docker.from>
         <docker.container.port>8080</docker.container.port>
+        <docker.host.port>8080</docker.host.port>
 
     </properties>
 
@@ -297,8 +298,9 @@
             <!-- -Ddocker.follow=true also a good option -->
             <!-- To find you docker ip address with docker machine: [docker-machine ip default] -->
             <!-- When running on a mac you may need [eval "$(docker-machine env default)"] : with the quotes -->
-            <!-- Running with JMeter (could also run integration tests 0 need to update the executions):
-                mvn package -DskipTests docker:build docker:run -Ddocker.follow=false jmeter:jmeter -Dhost=192.168.99.100 -Dport=8080 docker:stop
+            <!-- Running with JMeter (could also run integration tests (need to update the executions):
+                mvn package -DskipTests docker:build
+                mvn docker:run -Ddocker.follow=false jmeter:jmeter -Dhost=192.168.99.100 -Dport=8080 docker:stop
             -->
             <plugin>
                 <groupId>io.fabric8</groupId>
@@ -330,7 +332,7 @@
                                                     <include>${project.groupId}:${project.artifactId}</include>
                                                 </includes>
                                                 <outputDirectory>.</outputDirectory>
-                                                <outputFileNameMapping>app.war</outputFileNameMapping>
+                                                <outputFileNameMapping>app.jar</outputFileNameMapping>
                                             </dependencySet>
                                         </dependencySets>
                                     </inline>
@@ -347,11 +349,12 @@
                                     <arg>-jar</arg>
                                     <arg>/maven/app.jar</arg>
                                 </entryPoint>
+
                             </build>
 
                             <run>
                                 <ports>
-                                    <port>${docker.container.port}:${docker.container.port}</port>
+                                    <port>${docker.host.port}:${docker.container.port}</port>
                                 </ports>
 
                                 <log>
@@ -361,10 +364,11 @@
 
                                 <wait>
                                     <http>
-                                        <url>http://${docker.host.address}:${docker.container.port}</url>
+                                        <url>http://${docker.host.address}:${docker.host.port}/api/ping</url>
+                                        <method>GET</method>
                                     </http>
                                     <log>${docker.image.name} is ready.</log>
-                                    <time>20000</time>
+                                    <time>200000</time>
                                 </wait>
                             </run>
                         </image>
@@ -372,7 +376,6 @@
                 </configuration>
 
             </plugin>
-
         </plugins>
     </build>
 
