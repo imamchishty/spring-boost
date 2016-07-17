@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Brixton.RELEASE</version>
+        <version>Brixton.SR3</version>
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
