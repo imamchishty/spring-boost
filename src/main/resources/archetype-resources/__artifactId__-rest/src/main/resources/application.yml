@@ -37,11 +37,11 @@ info.app.ci.url: @pom.ciManagement.url@
 # If you wish to disable hystrix uncomment
 #feign.hystrix.enabled: false
 
-# Default feign requests run in different threads
-hystrix.command.default.execution.isolation.strategy: SEMAPHORE
-
 # Please remove this setting - added for demo, see AccountClient
 account.service.name: ${spring.application.name}
+
+#spring.zipkin.baseUrl: localhost:9411
+#spring.sleuth.keys.http.headers
 
 ---
 spring:

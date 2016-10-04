@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" packages="org.graylog2.log4j2">
+    <Appenders>
+        <!-- 12201-->
+        <GELF name="gelfAppender" server="${GRAYLOG_SERVER}" port="${GRAYLOG_PORT}" queueSize="1" />
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%level] [%thread] [%c{1.}] - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="gelfAppender"/>
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -11,11 +11,9 @@
     <description>${artifactId}-parent</description>
 
     <parent>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-parent</artifactId>
-        <version>Brixton.SR3</version>
-        <relativePath/>
-        <!-- lookup parent from repository -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.0.RELEASE</version>
     </parent>
 
     <modules>
@@ -86,7 +84,17 @@
     </properties>
 
     <dependencyManagement>
+
+
         <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Brixton.SR5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- Manage local dependencies -->
 
@@ -123,82 +131,64 @@
             <!-- Shedhack dependencies -->
 
             <dependency>
-                <groupId>com.shedhack.trace</groupId>
-                <artifactId>trace-request-api</artifactId>
-                <version>1.0.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.shedhack.trace</groupId>
-                <artifactId>trace-request-filter</artifactId>
-                <version>1.0.6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.shedhack.trace</groupId>
-                <artifactId>trace-request-jpa</artifactId>
-                <version>1.0.3</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.shedhack.exception</groupId>
                 <artifactId>exception-controller-spring</artifactId>
-                <version>1.0.8</version>
+                <version>2.0.1</version>
             </dependency>
 
             <dependency>
                 <groupId>com.shedhack.exception</groupId>
                 <artifactId>exception-core</artifactId>
-                <version>1.0.6</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.shedhack.thread</groupId>
-                <artifactId>thread-context-handler</artifactId>
-                <version>1.0.6</version>
+                <version>2.0.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.shedhack.thread</groupId>
                 <artifactId>thread-context-aspect</artifactId>
-                <version>1.0.10</version>
+                <version>2.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.thread</groupId>
+                <artifactId>thread-context-handler</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-api</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.shedhack.trace</groupId>
+                <artifactId>trace-request-filter</artifactId>
+                <version>2.0.1</version>
             </dependency>
 
             <dependency>
                 <groupId>com.shedhack.spring</groupId>
                 <artifactId>spring-actuator</artifactId>
-                <version>1.0.3</version>
-            </dependency>
-
-            <!-- Logging - version not via spring boot parent -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.19</version>
+                <version>2.0.1</version>
             </dependency>
 
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
-                <version>${log4j2.version}</version>
+                <groupId>com.shedhack.requestbody</groupId>
+                <artifactId>cache-filter</artifactId>
+                <version>2.0.0</version>
             </dependency>
 
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j2.version}</version>
+                <groupId>com.shedhack.requestbody</groupId>
+                <artifactId>cache-interceptor</artifactId>
+                <version>2.0.0</version>
             </dependency>
 
+            <!-- Graylog -->
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-jcl</artifactId>
-                <version>${log4j2.version}</version>
+                <groupId>org.graylog2.log4j2</groupId>
+                <artifactId>log4j2-gelf</artifactId>
+                <version>1.2.0</version>
             </dependency>
 
         </dependencies>

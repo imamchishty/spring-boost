@@ -1,0 +1,94 @@
+version: '2'
+
+# -----------------------------------
+# ENVIRONMENT VARIABLES
+# -----------------------------------
+# Required properties:
+# Please create .env file and set the following values:
+#
+# CONFIG_SERVER_CONFIG_DIR=/your/config/folder/location
+# -----------------------------------
+
+services:
+
+# -----------------------------------
+# CONFIG SERVER [localhost:8070]
+# -----------------------------------
+  config:
+    image: imamchishty/config-server
+    ports:
+      - "8070:8070"
+    environment:
+      CONFIG_DIR: ${CONFIG_SERVER_CONFIG_DIR}
+    volumes:
+      - ${CONFIG_SERVER_CONFIG_DIR}:${CONFIG_SERVER_CONFIG_DIR}
+
+# -----------------------------------
+# EUREKA SERVER [localhost:8071]
+# -----------------------------------
+  eureka:
+    image: imamchishty/eureka-server
+    ports:
+      - "8071:8071"
+
+# -----------------------------------
+# ZUUL SERVER [localhost:8072]
+# -----------------------------------
+  zuul:
+    image: imamchishty/zuul-server
+    ports:
+      - "8072:8072"
+    links:
+      - eureka
+
+# -----------------------------------
+# TURBINE SERVER [localhost:8073]
+# -----------------------------------
+  turbine:
+    image: imamchishty/turbine-server
+    ports:
+      - "8073:8073"
+    links:
+      - eureka
+
+# -----------------------------------
+# ZIPKIN SERVER [localhost:9411]
+# -----------------------------------
+  zipkin:
+    image: imamchishty/zipkin-server
+    ports:
+      - "9411:9411"
+
+# -----------------------------------
+# GRAYLOG SERVER [localhost:9000]
+# -----------------------------------
+
+  some-mongo:
+    image: "mongo:3"
+
+  some-elasticsearch:
+    image: "elasticsearch:2"
+    command: "elasticsearch -Des.cluster.name='graylog'"
+
+  # Graylog section is taken from http://docs.graylog.org/en/2.0/pages/installation/docker.html
+  # See https://hub.docker.com/r/graylog2/server/ for more details
+  # Runs at localhost:9000 (on mac) username/password = admin/admin
+
+  graylog:
+    image: graylog2/server:2.0.1-1
+    environment:
+      GRAYLOG_PASSWORD_SECRET: somepasswordpepper
+      GRAYLOG_ROOT_PASSWORD_SHA2: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      GRAYLOG_REST_TRANSPORT_URI: http://localhost:12900
+    links:
+      - some-mongo:mongo
+      - some-elasticsearch:elasticsearch
+    ports:
+      - "9000:9000"
+      - "12900:12900"
+      - "12201/udp:12201/udp"
+      - "1514/udp:1514/udp"
+
+
+
+

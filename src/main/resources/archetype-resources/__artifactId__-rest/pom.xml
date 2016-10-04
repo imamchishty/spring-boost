@@ -55,21 +55,6 @@
             <artifactId>trace-request-filter</artifactId>
         </dependency>
 
-        <!-- FIXME if you want the trace request model to
-            be stored in a relational db then:
-
-             1. Uncomment the trace-request-jpa dependency.
-             2. In Application.java:
-                - add: @EnableTraceRequestJpa.
-                - add: @Autowired JpaTraceRequestInterceptor jpaTraceRequestInterceptor;
-                - add: jpaTraceRequestInterceptor to the list of Interceptors for the RequestFilter.
-            -->
-        <!--
-        <dependency>
-            <groupId>com.shedhack.trace</groupId>
-            <artifactId>trace-request-jpa</artifactId>
-        </dependency> -->
-
         <dependency>
             <groupId>com.shedhack.exception</groupId>
             <artifactId>exception-controller-spring</artifactId>
@@ -175,6 +160,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
 
         <!-- Swagger http://host:port/api/docs-->
