@@ -6,9 +6,7 @@ import com.shedhack.exception.controller.spring.config.EnableExceptionController
 import com.shedhack.spring.actuator.config.EnableActuatorsAndInterceptors;
 import com.shedhack.spring.actuator.interceptor.ActuatorExceptionInterceptor;
 import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
-import com.shedhack.thread.context.config.EnableThreadContextAspectWithLogging;
 import com.shedhack.thread.context.config.EnableThreadContextAspect;
-import com.shedhack.trace.request.api.service.TraceRequestService;
 import com.shedhack.trace.request.filter.DefaultTraceRequestInterceptor;
 import com.shedhack.trace.request.filter.RequestTraceFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +43,13 @@ import java.util.List;
 @EnableExceptionController
 @EnableThreadContextAspect
 @EnableActuatorsAndInterceptors
-@PropertySources(value = {
-        @PropertySource(value = "classpath:/git-build.properties")
-})
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHystrix
 @EnableHystrixDashboard
+@PropertySources(value = {
+        @PropertySource(value = "classpath:/git-build.properties")
+})
 public class Application extends WebMvcConfigurerAdapter {
 
     // --------------------
