@@ -153,45 +153,7 @@ A Feign example has been added to the PingController, /api/accounts, please take
 
 ### Tracing requests
 
-Project page is [__here__](https://github.com/imamchishty/trace-request-filter). High level features:
-
-- Trace distributed API calls (shows exceptions as well).
-
-- Libraries that combine to enable tracing of distributed calls.
-
-- Gives full visibility to the execution path.
-
-- Live status’s of requests, RUNNING, FAILED, COMPLETED.
-
-- Linked to exceptions
-
-- Provides ability to extend via inteceptors.
-
-- Plug and play service/persistent as required.
-
-- Visually see requests, will soon support Zipkin.
-
-#### Request Trace Filter
-
-- Regular servlet filter
-
-- Can be used outside of Spring 
-
-- Creates/sets the required headers (__RequestId__, __GroupId__, __CallerId__, __ApplicationId__)
-
-- Extendable via API interceptors
-
-- Filter is not aware of implementation, contract via the API module.
-
-__Key Terms:__
-
-- **RequestId**: unique ID when a call is made to a service. This acts as the PK of the request.
-
-- **GroupId**: services interact with other services. The entire execution path is grouped using a groupId. Searching on this will show ALL interactions.
-
-- **CallerId**: when a service calls another service we know who the caller was by this property. The caller sets the callerId using their requestId.
-
-- **ApplicationId**: Defaults to the name of the application.
+Please note that the original mechanism of tracing requests has been replaced by Spring Sleuth. All endpoints (/admin/requests, /admin/exceptions) are still valid as well as zipkin support.
 
 #### /admin/requests
 
@@ -329,6 +291,10 @@ Bundled in the cloud-servers folder you'll see the following servers (each with 
 - **cloud-turbine** - netflix central dashboard, runs on port 8073.
 
 - **cloud-zuul** - API gateway running on port 8072, see the bootstrap.yml file (in the cloud-zuul folder) for examples. By default it blocks /admin and permits /api/**.
+
+- **cloud-zipkin** - Zipkin to trace requests via slueth, already setup.
+
+- **cloud-graylog2** - Logging, this requires you to use the graylog log4j2 file under resources. Rename this to log4j2 and remove the other one. You will need to setup the server/port details. 
 
 The preferred way to start them all is using docker-compose, the file is located in the cloud servers directory.
 For further details: https://github.com/imamchishty/cloud-servers
