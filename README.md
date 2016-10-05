@@ -234,6 +234,7 @@ All actuators are under /admin. These endpoints shouldn't be available to client
 
 | URI                        | Description                                                            |
 | -------------------------- |----------------------------------------------------------------------|
+| /admin/help |  Lists all admin endpoints. |
 | /admin/build |  Build, git, ci information. Mainly taken from git-build.properties |
 | /admin/exceptions | Custom end point that shows the last n number of exceptions, please see the exception handling section for more details.|
 | /admin/requests | The trace request filter + interceptors can provide lots of details of requests. For more details see 'tracing requests' | 
@@ -317,7 +318,7 @@ You can use the goals and plugins defined to create a pipeline. For example:
 
 By default each module has a maven site. Just look at the src/site folder. In the parents src folder you'll also find a changes folder, this contains a simple changes file which can be used as a releases journal. This gets added to the maven site when created. You can also deploy the maven site to your github pages although the default behaviour is to use a repo such as Nexus. Details and help for this is in the parent pom.
 
-## Edge Services
+## Cloud Services
 
 Bundled in the cloud-servers folder you'll see the following servers (each with a run.sh script):
 
@@ -329,7 +330,8 @@ Bundled in the cloud-servers folder you'll see the following servers (each with 
 
 - **cloud-zuul** - API gateway running on port 8072, see the bootstrap.yml file (in the cloud-zuul folder) for examples. By default it blocks /admin and permits /api/**.
 
-At the root of the cloud-servers folder you'll see a pom.xml, this allows you to control the version of spring-cloud-parent for the servers, currently set to BRIXTON. It is useful to have these servers running locally when developing. In order to use these with the rest module you'll need to make a few changes, described in the rest module properties section later.
+The preferred way to start them all is using docker-compose, the file is located in the cloud servers directory.
+For further details: https://github.com/imamchishty/cloud-servers
 
 ## How do I create a new project using 'boost'?
 
