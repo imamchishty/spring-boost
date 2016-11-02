@@ -19,6 +19,16 @@ __Key features:__
 
 - __Consistent__
 
+## How do I create a new project using 'boost'?
+
+Spring-boost is available in maven central and bintray so you don't need to build the project locally. To run the archetype:
+
+mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=2.0.3 -DinteractiveMode=false -q
+
+Example:
+
+ mvn archetype:generate -DgroupId=com.kungfu -DartifactId=panda -Dversion=1.0.0-SNAPSHOT -Dpackage=com.kungfu.panda -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=2.0.3 -DinteractiveMode=false -q
+This will create a project folder locally. Open that folder and the try to run the shell script, run.sh (you might need to chmod it, e.g. chmod u+x run.sh). The application should now run.
 
 ## Maven Modules
 
@@ -298,19 +308,6 @@ Bundled in the cloud-servers folder you'll see the following servers (each with 
 
 The preferred way to start them all is using docker-compose, the file is located in the cloud servers directory.
 For further details: https://github.com/imamchishty/cloud-servers
-
-## How do I create a new project using 'boost'?
-
-Spring-boost is available in maven central and bintray so you don't need to build the project locally.
-To run the archetype:
-
-mvn archetype:generate -DgroupId=YOUR_GROUP_ID -DartifactId=YOUR_ARTIFACT_ID -Dversion=YOUR_VERSION -Dpackage=YOUR_ROOT_JAVA_PACKAGE -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=1.5.0 -DinteractiveMode=false -q
-
-Example:
-
-     mvn archetype:generate -DgroupId=com.kungfu -DartifactId=panda -Dversion=1.0.0-SNAPSHOT -Dpackage=com.kungfu.panda -DarchetypeGroupId=com.shedhack.tool -DarchetypeArtifactId=spring-boost -DarchetypeVersion=2.0.0 -DinteractiveMode=false -q
-
-This will create a project folder locally. Open that folder and the try to run the shell script, run.sh (you might need to chmod it, e.g. chmod u+x run.sh). The application should now run.
 
 ## Docker?
 
