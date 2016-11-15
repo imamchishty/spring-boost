@@ -49,7 +49,7 @@ public class PingController {
      * THIS METHOD IS A FEIGN EXAMPLE, PLEASE SEE AccountClient
      * Remove when you're happy.
      */
-    @ThreadContext
+    @ThreadContext()
     @RequestMapping(value = "/api/accounts", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Integer>> getAllAccountBalances() {
 

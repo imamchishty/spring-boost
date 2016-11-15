@@ -43,6 +43,10 @@ account.service.name: ${spring.application.name}
 #spring.zipkin.baseUrl: localhost:9411
 #spring.sleuth.keys.http.headers
 
+logging.level.: ERROR
+logging.level.com.shedhack.exception.controller.spring: ERROR
+logging.level.com.shedhack.trace.request: INFO
+
 ---
 spring:
   profiles: development

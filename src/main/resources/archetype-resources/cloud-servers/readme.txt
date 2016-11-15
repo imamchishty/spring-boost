@@ -10,8 +10,6 @@ session runs on port 8075
 Other services
 ------------------------------
 zipkin runs on port 9411
-graylog runs on port 9000
-
 
 Starting with docker-compose:
 
