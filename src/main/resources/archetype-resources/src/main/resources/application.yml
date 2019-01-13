@@ -1,0 +1,83 @@
+# --------------------
+# Core spring settings
+# --------------------
+
+spring:
+
+  application:
+    version: '@pom.version@'
+
+  server:
+    port: 8080
+
+# --------------------------------
+# Admin/actuator endpoint settings
+# --------------------------------
+
+management.endpoints.web:
+  base-path: /admin
+  exposure.include: '*'
+  exposure.exclude: shutdown
+
+
+# -----------------------------------------------
+# Build information, /admin/info and /admin/build
+# -----------------------------------------------
+
+info.app.name: ${spring.application.name}
+info.app.profile: ${spring.profiles.active}
+info.app.maven.version: '@pom.version@'
+info.app.maven.artifactId: '@pom.artifactId@'
+info.app.maven.groupId: '@pom.groupId@'
+info.app.ci.build: '@ci.build@'
+info.app.ci.url: '@pom.ciManagement.url@'
+
+# ---------------
+# Zipkin settings
+# ---------------
+
+#spring.zipkin.baseUrl: localhost:9411
+#spring.sleuth.keys.http.headers
+
+# ----------------
+# Logging settings
+# ----------------
+
+logging.level.: ERROR
+logging.level.com.shedhack: ERROR
+
+
+---
+# ----------------------------------
+# Local/development profile settings
+# ----------------------------------
+
+spring:
+  profiles: local
+
+  security:
+    user.name: admin
+    user.password: admin
+
+---
+# -----------------------------------------------
+# Test/Staging/CI build deployed profile settings
+# -----------------------------------------------
+
+spring:
+  profiles: test
+
+
+---
+# ---------------------------
+# Production profile settings
+# ---------------------------
+
+spring:
+  profiles: production
+
+
+
+
+
+

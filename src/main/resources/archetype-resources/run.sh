@@ -3,7 +3,7 @@
 if [ ! -z $1 ]; then
     SPRING_PROFILE=$1
 else
-    SPRING_PROFILE="development"
+    SPRING_PROFILE="local"
 fi
 
 if [ "$2" == "skip" ]; then

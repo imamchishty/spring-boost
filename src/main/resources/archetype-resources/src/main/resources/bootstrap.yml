@@ -1,0 +1,24 @@
+---
+# --------------------------------
+# Bootstrapped settings for Spring
+# --------------------------------
+
+spring:
+
+  profiles:
+    active: local
+
+  application:
+    name: ${artifactId}-api
+
+  # -------------------------------------------------
+  # Consul settings for config/registration/discovery
+  # -------------------------------------------------
+
+  cloud:
+    consul:
+      config:
+        enabled: false
+      host: localhost
+      port: 8500
+      enabled: false
