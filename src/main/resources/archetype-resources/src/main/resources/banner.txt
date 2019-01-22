@@ -5,6 +5,13 @@
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
 
- :: ${spring.application.name} :: v${spring.application.version}
- :: profile - ${spring.profiles.active}
- :: port - ${spring.server.port}
+------------------------------------------
+
+Application Name:   ${spring.application.name}
+Version:            ${spring.application.version}
+Active Profile(s):  ${spring.profiles.active}
+Server Port:        ${server.port}
+Spring Version:     2.1.1.RELEASE
+JDK Version:        @java.version@
+
+------------------------------------------

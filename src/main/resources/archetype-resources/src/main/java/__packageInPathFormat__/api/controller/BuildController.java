@@ -19,88 +19,82 @@ public class BuildController {
 
     private TreeMap<String, Object> build = new TreeMap<>();
 
-    // TODO enable when the Git plugin @Value("${git.commit.id.abbrev}")
+    //TODO Git settings need to be fixed in the pom.xml and the generated properties file will need to be read from
+
+    //@Value("${git.commit.id.abbrev}")
     private String gitCommitAbbrevVal;
     private static String gitCommitAbbrevKey = "git.commit.id.abbrev";
 
-    // @Value("${git.commit.user.email}")
+    //@Value("${git.commit.user.email}")
     private String gitCommitEmailVal;
     private static String gitCommitEmailKey = "git.commit.user.email";
 
-    // @Value("${git.commit.message.full}")
+    //@Value("${git.commit.message.full}")
     private String gitCommitMsgVal;
     private static String gitCommitMsgKey = "git.commit.message.full";
 
-    // @Value("${git.commit.id}")
+    //@Value("${git.commit.id}")
     private String gitCommitIdVal;
     private static String gitCommitIdKey = "git.commit.id";
 
-    // @Value("${git.commit.user.name}")
+    //@Value("${git.commit.user.name}")
     private String gitCommitUsernameVal;
     private static String gitCommitUsernamekey = "git.commit.user.name";
 
-    // @Value("${git.commit.id.describe}")
+    //@Value("${git.commit.id.describe}")
     private String gitCommitDescVal;
     private static String gitCommitDescKey = "git.commit.id.describe";
 
-    // @Value("${git.build.user.email}")
+    //@Value("${git.build.user.email}")
     private String gitBuildEmailVal;
     private static String gitBuildEmailKey = "git.build.user.email";
 
-    // @Value("${git.branch}")
+    //@Value("${git.branch}")
     private String gitBranchVal;
     private static String gitBranchKey = "git.branch";
 
-    // @Value("${git.commit.time}")
+    //@Value("${git.commit.time}")
     private String gitCommitTimeVal;
     private static String gitCommitTimeKey = "git.commit.time";
 
-    // @Value("${git.build.time}")
+    //@Value("${git.build.time}")
     private String gitBuildTimeVal;
     private static String gitBuildTimeKey = "git.build.time";
 
-    // @Value("${git.remote.origin.url}")
+    //@Value("${git.remote.origin.url}")
     private String gitOriginVal;
     private static String gitOriginKey = "git.remote.origin.url";
 
     @Value("${info.app.maven.version}")
     private String mavenVersionVal;
-
     private static String mavenVersionKey = "maven.version";
 
     @Value("${info.app.maven.artifactId}")
     private String mavenArtifactIdVal;
-
     private static String mavenArtifactIdKey = "maven.artifactId";
 
     @Value("${info.app.maven.groupId}")
     private String mavenGroupIdVal;
-
     private static String mavenGroupIdKey = "maven.groupId";
 
     @Value("${info.app.ci.build}")
     private String ciBuildVal;
-
     private static String ciBuildKey = "ci.build.number";
 
     @Value("${info.app.ci.url}")
     private String ciUrlVal;
-
     private static String ciUrlKey = "ci.build.url";
 
     @Value("${spring.profiles.active}")
     private String springProfileVal;
-
     private static String springProfileKey = "spring.profiles.active";
 
     @Value("${spring.application.name}")
     private String springAppNameVal;
-
     private static String springAppNameKey = "spring.application.name";
 
-    @Value("${spring.server.port}")
+    @Value("${server.port}")
     private int springPortVal;
-
     private static String springPortKey = "spring.server.port";
 
     @PostConstruct

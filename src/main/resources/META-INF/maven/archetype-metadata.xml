@@ -75,13 +75,13 @@
         </fileSet>
 
 
-        <!-- Create cloud servers directory-->
+<!--        &lt;!&ndash; Create cloud servers directory&ndash;&gt;
         <fileSet filtered="true" encoding="UTF8">
             <directory>cloud-servers</directory>
             <includes>
                 <include>**/*.*</include>
             </includes>
-        </fileSet>
+        </fileSet>-->
 
     </fileSets>
 

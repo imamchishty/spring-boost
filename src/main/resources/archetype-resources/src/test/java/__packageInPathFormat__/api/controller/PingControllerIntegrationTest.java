@@ -2,27 +2,40 @@ package ${package}.api.controller;
 
 import ${package}.Application;
 import ${package}.api.constant.ApiConstants;
+import com.jayway.restassured.RestAssured;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static com.jayway.restassured.RestAssured.given;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
+@SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Application.class)
 public class PingControllerIntegrationTest {
 
-    @Autowired
-    private TestRestTemplate template;
+    @LocalServerPort
+    private int port;
+
+    @Value("${spring.security.user.name}")
+    private String username;
+
+    @Value("${spring.security.user.password}")
+    private String password;
 
     @Test
-    public void checkPing() throws Exception {
-        ResponseEntity<String> response = template.getForEntity(ApiConstants.API_PING, String.class);
-        assertThat(response.getBody(), equalTo("${artifactId}-api is running....."));
+    public void check_api_is_running_via_ping() {
+        given().auth().preemptive().basic(username, password)
+                .when().get(ApiConstants.API_PING).then()
+                .statusCode(200);
+    }
+
+    @Before
+    public void setBaseUri () {
+        RestAssured.port = port;
+        RestAssured.baseURI = "http://localhost";
     }
 }
