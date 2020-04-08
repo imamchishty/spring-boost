@@ -5,7 +5,7 @@
 ## What the hell is it? 
 Spring Boost is a Maven Archetype that creates a spring boot maven project perfect for building microservices. If you need to get up to speed quickly then this archetype will provide you with lots of default settings allowing you to focus on your business logic. If you use this for building all of your microservices then you'll end up with a consistent way of building them, moving from ms1 to ms2 should be very easy.  
 
-Uses Spring Boot __2.1.1.RELEASE__
+Uses Spring Boot __2.2.6.RELEASE__
 
 __Key features:__
 
